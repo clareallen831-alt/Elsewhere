@@ -1,5 +1,5 @@
-const CACHE='elsewhere-v4';
-const ASSETS=['./','./index.html','./styles.css','./app.js','./manifest.json','./icon.svg'];
+const CACHE='elsewhere-v4-photos';
+const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./manifest.json','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
@@ -10,6 +10,13 @@ self.addEventListener('fetch',event=>{
   event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(event.request,copy));return r})));
 });
 self.addEventListener('notificationclick',event=>{
-  const action=event.action||'open';event.notification.close();const target=new URL('./index.html',self.registration.scope);target.searchParams.set('result',action);
-  event.waitUntil((async()=>{const all=await clients.matchAll({type:'window',includeUncontrolled:true});for(const client of all){if('navigate'in client)await client.navigate(target.href);return client.focus()}if(clients.openWindow)return clients.openWindow(target.href)})());
+ const action=event.action||'open';
+ event.notification.close();
+ const target=new URL('./index.html',self.registration.scope);
+ target.searchParams.set('result',action);
+ event.waitUntil((async()=>{
+   const all=await clients.matchAll({type:'window',includeUncontrolled:true});
+   for(const client of all){if('navigate'in client)await client.navigate(target.href);return client.focus()}
+   if(clients.openWindow)return clients.openWindow(target.href);
+ })());
 });
