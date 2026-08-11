@@ -1,5 +1,5 @@
-const CACHE='elsewhere-v7-health-dates';
-const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./health-v2.js','./health-v2.css','./health-dates.js','./manifest.json','./icon.svg'];
+const CACHE='elsewhere-v8-push-diagnostics';
+const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./health-v2.js','./health-v2.css','./health-dates.js','./health-push-test.js','./manifest.json','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 async function withHealth(response){
@@ -9,6 +9,7 @@ async function withHealth(response){
   text=text.replace(/<script src="\.\/health\.js"><\/script>/g,'');
   if(!text.includes('health-v2.js'))text=text.replace('</body>','<script src="./health-v2.js"></script></body>');
   if(!text.includes('health-dates.js'))text=text.replace('</body>','<script src="./health-dates.js"></script></body>');
+  if(!text.includes('health-push-test.js'))text=text.replace('</body>','<script src="./health-push-test.js"></script></body>');
   const headers=new Headers(response.headers);headers.set('content-type','text/html; charset=utf-8');
   return new Response(text,{status:response.status,statusText:response.statusText,headers});
 }
@@ -23,6 +24,7 @@ self.addEventListener('push',event=>{
   event.waitUntil(self.registration.showNotification(data.title||'Elsewhere reminder',{
     body:data.body||'Time for your daily pill.',
     icon:'./icon.svg',badge:'./icon.svg',tag:data.tag||'elsewhere-reminder',requireInteraction:true,
+    renotify:true,vibrate:[250,120,250],timestamp:Date.now(),
     data:{url:data.url||'./index.html?health=medication'}
   }));
 });
