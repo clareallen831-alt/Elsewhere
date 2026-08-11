@@ -1,9 +1,13 @@
 (() => {
   const PUSH_URL='https://ctzepbgcxtmmeugvwnkd.supabase.co/functions/v1/elsewhere-push';
   const INSTALL_KEY='elsewhere_push_install';
+  const DIAG_DB='elsewhere_push_diag_v1', STORE='events';
 
   function creds(){try{return JSON.parse(localStorage.getItem(INSTALL_KEY)||'null')}catch{return null}}
   function status(message,kind=''){const el=document.querySelector('#reminderStatus');if(!el)return;el.textContent=message;el.dataset.kind=kind}
+  function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+  function openDiag(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DIAG_DB,1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(STORE))req.result.createObjectStore(STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+  async function lastReceipt(){try{const db=await openDiag();return await new Promise((resolve,reject)=>{const req=db.transaction(STORE,'readonly').objectStore(STORE).get('lastPush');req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error)})}catch{return null}}
 
   async function serverTest(){
     const c=creds();
@@ -13,12 +17,21 @@
       const p=await Notification.requestPermission();
       if(p!=='granted'){status('Notifications are blocked on this phone.','error');return}
     }
-    status('Sending a real test push…','working');
+    const before=await lastReceipt();
+    const beforeTime=before?.receivedAt||0;
+    status('Sending a real server push…','working');
     try{
       const r=await fetch(PUSH_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'test',installId:c.id,installSecret:c.secret})});
       const body=await r.json().catch(()=>({}));
       if(!r.ok)throw new Error(body.error||'Server push test failed');
-      status('Test push accepted by the push service. Check your notification shade / lock screen now.','ok');
+      status('Push service accepted it. Checking whether this phone received it…','working');
+      let receipt=null;
+      for(let i=0;i<8;i++){await sleep(750);receipt=await lastReceipt();if(receipt?.receivedAt>beforeTime)break}
+      if(receipt?.receivedAt>beforeTime){
+        status('✓ The server push reached this phone. If no notification appeared, check Samsung/Chrome notification display settings.','ok');
+      }else{
+        status('The push service accepted the message, but this phone has not recorded receiving it yet. Re-enable the reminder to refresh the push subscription.','error');
+      }
     }catch(e){status(e.message||'Could not send the server test.','error')}
   }
 
