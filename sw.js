@@ -1,5 +1,5 @@
-const CACHE='elsewhere-v6-reminders-weight';
-const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./health-v2.js','./health-v2.css','./manifest.json','./icon.svg'];
+const CACHE='elsewhere-v7-health-dates';
+const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./health-v2.js','./health-v2.css','./health-dates.js','./manifest.json','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 async function withHealth(response){
@@ -8,6 +8,7 @@ async function withHealth(response){
   let text=await response.text();
   text=text.replace(/<script src="\.\/health\.js"><\/script>/g,'');
   if(!text.includes('health-v2.js'))text=text.replace('</body>','<script src="./health-v2.js"></script></body>');
+  if(!text.includes('health-dates.js'))text=text.replace('</body>','<script src="./health-dates.js"></script></body>');
   const headers=new Headers(response.headers);headers.set('content-type','text/html; charset=utf-8');
   return new Response(text,{status:response.status,statusText:response.statusText,headers});
 }
