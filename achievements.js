@@ -6,8 +6,6 @@
     script.onerror=reject;
     document.head.appendChild(script);
   });
-  load('./achievements-base.js')
-    .then(()=>load('./project-steps.js'))
-    .then(()=>load('./food.js'))
-    .catch(console.error);
+  load('./achievements-base.js').then(()=>load('./project-steps.js')).catch(console.error);
+  load('./food.js').catch(console.error);
 })();
