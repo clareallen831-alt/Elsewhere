@@ -1,0 +1,28 @@
+.homeView{display:none}.homeView.active{display:block}
+.homeHero{margin-bottom:16px}
+.homeGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:0 0 11px}
+.homeCard,.homeWide,.homeNudge{width:100%;border:1px solid rgba(71,83,70,.1);background:rgba(255,253,248,.96);box-shadow:var(--shadow);color:var(--ink);text-align:left}
+.homeCard{min-height:154px;border-radius:22px;padding:19px;display:flex;flex-direction:column;position:relative}
+.homeCard>b{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:var(--sage2);font-size:1.35rem;margin-bottom:17px}
+.homeCard span{display:flex;flex-direction:column;gap:5px;padding-right:20px}
+.homeCard strong,.homeWide strong,.homeNudge strong{font-family:var(--serif);font-size:1.3rem;font-weight:400}
+.homeCard small,.homeWide small,.homeNudge em{color:var(--muted);font-size:.78rem;line-height:1.4;font-style:normal}
+.homeCard>i,.homeWide>i,.homeNudge>i{position:absolute;right:18px;bottom:18px;font-style:normal;color:var(--forest)}
+.homeFood{background:linear-gradient(145deg,#fffdf8,#f5eee5)}
+.homeHealth{background:linear-gradient(145deg,#fffdf8,#edf2eb)}
+.homeWide{border-radius:20px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;position:relative;margin-bottom:11px}
+.homeWide span{display:flex;flex-direction:column;gap:4px;padding-right:30px}
+.homeNudge{border-radius:22px;padding:20px;background:linear-gradient(135deg,#344b3c,#445d4a);color:white;display:flex;justify-content:space-between;align-items:center;position:relative}
+.homeNudge span{display:flex;flex-direction:column;gap:5px;padding-right:34px}
+.homeNudge small{font-size:.61rem;letter-spacing:.16em;font-weight:850;color:#dce7de}
+.homeNudge strong{font-size:1.42rem}
+.homeNudge em{color:rgba(255,255,255,.75)}
+.homeNudge>i{color:white;bottom:auto;top:50%;transform:translateY(-50%)}
+.nudgeThing{background:linear-gradient(145deg,#f3f6ef,#fffdf8)}
+.bottomNav{grid-template-columns:repeat(4,1fr)}
+@media(max-width:430px){
+  .homeGrid{grid-template-columns:1fr 1fr}
+  .homeCard{min-height:145px;padding:16px}
+  .homeCard strong{font-size:1.16rem}
+  .homeCard small{font-size:.72rem}
+}
