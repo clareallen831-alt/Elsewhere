@@ -316,3 +316,25 @@ The next useful step is to use the complete app for several ordinary workdays an
 - whether any part creates pressure rather than relief
 
 Future changes should be based on those real-use observations rather than adding ideas simply because they are possible.
+
+
+## 14. Phase 4: reorganise around real use — completed
+
+A visual and functional review showed that Elsewhere had expanded beyond its original activity-suggestion purpose. Food, health, Hugo and sewing had become the clearer reasons to open the app, while the original Today questionnaire and Look at me now occupied too much of the primary experience.
+
+Completed changes:
+
+- replaced the long questionnaire with a short practical Home
+- promoted Food and Health to the main navigation
+- retained Hugo & Me and My Sewing as prominent Home choices
+- combined Make, My Places and Ideas within My Life
+- moved the original activity chooser into My Life as “Help me choose something”
+- removed Look at me now from visible navigation
+- preserved historic memories, photographs and their backup data
+- reduced the bottom navigation to Home, Food, Health and My Life
+- fixed Health so it loads with the main app instead of appearing only after a refresh
+- retained the existing visual identity, local-first privacy model and backup compatibility
+
+The revised purpose is:
+
+> Elsewhere is a private, gentle personal companion for food, health and the parts of life Clare wants to make room for—without turning them into another job.
