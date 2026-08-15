@@ -1,8 +1,8 @@
-const CACHE='elsewhere-v9-push-receipts';
-const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./health-v2.js','./health-v2.css','./health-dates.js','./health-push-test.js','./manifest.json','./icon.svg'];
+const CACHE='elsewhere-v10-food-recipes';
+const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./achievements.js','./achievements-base.js','./project-steps.js','./food.js','./recipe-calculator.js','./health-v2.js','./health-v2.css','./health-dates.js','./health-push-test.js','./manifest.json','./icon.svg'];
 const DIAG_DB='elsewhere_push_diag_v1', DIAG_STORE='events';
 function openDiagDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DIAG_DB,1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(DIAG_STORE))req.result.createObjectStore(DIAG_STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
-async function recordPush(data){try{const db=await openDiagDb();await new Promise((resolve,reject)=>{const tx=db.transaction(DIAG_STORE,'readwrite');tx.objectStore(DIAG_STORE).put({receivedAt:Date.now(),tag:data?.tag||'elsewhere-reminder'},'lastPush');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}catch{}}
+async function recordPush(data){try{const db=await openDiagDb();await new Promise((resolve,reject)=>{const tx=db.transaction(DIAG_STORE,'readwrite');tx.objectStore(STORE).put({receivedAt:Date.now(),tag:data?.tag||'elsewhere-reminder'},'lastPush');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}catch{}}
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 async function withHealth(response){
