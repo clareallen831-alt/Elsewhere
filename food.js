@@ -69,7 +69,7 @@
     const section = $f('#cook');
     if (!section) return;
     section.innerHTML = `
-      <button class="back" data-food-back>← My Things</button>
+      <button class="back" data-food-back>← Home</button>
       <div class="sectionIntro foodIntro">
         <p class="eyebrow">OUR FOOD</p>
         <h1>Eat without the faff.</h1>
@@ -101,7 +101,7 @@
       <div class="foodLegacy" id="foodLegacy"></div>
       <p class="foodNote">Calorie figures here are for everyday tracking and can be estimates. Elsewhere is keeping this food data on this device.</p>
     `;
-    section.querySelector('[data-food-back]').onclick = () => typeof go === 'function' ? go('things') : null;
+    section.querySelector('[data-food-back]').onclick = () => typeof go === 'function' ? go('today') : null;
   }
 
   function injectFoodStyles() {
