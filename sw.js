@@ -1,4 +1,4 @@
-const CACHE='elsewhere-v14-phase4';
+const CACHE='elsewhere-v14-phase4b';
 const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./achievements.js','./achievements-base.js','./project-steps.js','./food.js','./food-extras.js','./backup.js','./recipe-calculator.js','./recipe-paste.js','./health-v2.js','./health-v2.css','./health-dates.js','./health-push-test.js','./phase4.js','./phase4.css','./manifest.json','./icon.svg'];
 const DIAG_DB='elsewhere_push_diag_v1', DIAG_STORE='events';
 function openDiagDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DIAG_DB,1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(DIAG_STORE))req.result.createObjectStore(DIAG_STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
