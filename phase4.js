@@ -24,13 +24,20 @@
     });
   }
 
-  const generatedHealthNav = document.querySelector('.nav[data-health-nav]');
-  const openHealth = generatedHealthNav?.onclick ? generatedHealthNav.onclick.bind(generatedHealthNav) : null;
-  generatedHealthNav?.remove();
-
-  document.querySelectorAll('[data-go="health"]').forEach(button => {
-    if (openHealth) button.addEventListener('click', openHealth);
-  });
+  function wireHealthNavigation() {
+    const generated = document.querySelector('.nav[data-health-nav]');
+    if (!generated) return;
+    const openHealth = generated.onclick ? generated.onclick.bind(generated) : null;
+    generated.remove();
+    if (openHealth) {
+      document.querySelectorAll('[data-go="health"]').forEach(button => {
+        if (button.dataset.healthWired) return;
+        button.dataset.healthWired = 'true';
+        button.addEventListener('click', openHealth);
+      });
+    }
+    syncNavigation();
+  }
 
   document.addEventListener('click', () => setTimeout(syncNavigation, 0));
   const main = document.querySelector('main');
@@ -49,5 +56,10 @@
     }).format(new Date()).toUpperCase();
   }
 
+  wireHealthNavigation();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(wireHealthNavigation, 0), {once:true});
+  }
+  setTimeout(wireHealthNavigation, 700);
   syncNavigation();
 })();
