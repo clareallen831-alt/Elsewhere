@@ -1,6 +1,6 @@
 # Elsewhere
 
-Elsewhere is a private, phone-friendly app that helps Clare step away from scrolling and choose one manageable thing that feels like her own.
+Elsewhere is a private, phone-friendly companion for food, health and the parts of life Clare wants to make room for.
 
 It is deliberately gentle:
 
@@ -9,77 +9,87 @@ It is deliberately gentle:
 - no paid AI
 - no demand to be productive
 - personal information stays on the device
-- one useful next step rather than an overwhelming list
+- useful tools without turning life into another job
 
 Live app: https://clareallen831-alt.github.io/Elsewhere/
 
-## What Elsewhere currently includes
+## Current structure
 
-### Today
+### Home
 
-Choose whether it is a workday or day off, current energy, what would help, an area of life and the time available. Elsewhere offers one suitable activity.
+A short starting point for the areas used most:
 
-It also includes:
+- Food
+- Health
+- Hugo & Me
+- My Sewing
+- More of my life
 
-- “Shape my evening”
-- an immediate “Get me off my phone” prompt
-- a no-punishment route when something does not happen
-- liked, saved and blocked activity preferences
+The original activity-suggestion experience remains available through **Help me choose something**, but it is no longer the default home screen.
 
-### My Things
+### Food
 
-Personal areas that are intended to grow slowly rather than become goals:
+The food area supports:
 
-- Our Food
+- breakfast, lunch, dinner, snacks and drinks recorded separately
+- daily calorie totals and an optional personal target
+- quick food entry
+- importing several calorie estimates from ChatGPT
+- saved and reusable meals
+- recent food history
+- recipes built from ingredients
+- recipe totals and per-portion calculations
+- pasted recipes and nutritional information
+- adding a calculated recipe portion to the daily food record
+
+Food-photo calorie estimation was deliberately deferred so the app remains free and predictable.
+
+### Health
+
+Private on-device tools include:
+
+- cycle and symptom records
+- medication details
+- daily pill reminders
+- weight and treatment tracking
+- health-concern dates
+- notification and push-delivery checks
+
+### My Life
+
+My Life brings together:
+
 - Hugo & Me
 - My Sewing
 - Make
 - My Places
+- saved ideas
+- the optional gentle activity chooser
 
-Lists can be checked off in small steps. Completed things can be saved as memories.
+These are places to return to, not goals to complete.
 
-### Look at me now
+## Phase 4 simplification
 
-A private record of things that happened:
+The app was reorganised after real use showed that food, health, Hugo and sewing had become more relevant than the original front-page questionnaire.
 
-- freeform activity logging
-- reflections and feelings
-- optional photos
-- “proof I was safe” moments
-- recent memories and gentle observations
+Phase 4:
 
-### Health and treatment
+- replaced the long questionnaire with a practical Home
+- reduced the main navigation to Home, Food, Health and My Life
+- moved Ideas into My Life
+- moved the activity chooser behind an optional route
+- removed Look at me now from visible navigation
+- retained historic memories in local storage and backups
+- made Health load as part of the main app
+- preserved all existing data formats and backup compatibility
 
-Private on-device tools include:
+## Backup and restore
 
-- weight and treatment tracking
-- medication and health-concern dates
-- daily pill reminders
-- notification and push-delivery checks
-
-### Eat and recipes
-
-The food area now supports:
-
-- meals recorded separately across the day
-- daily calorie totals
-- an optional personal calorie target
-- saved and reusable meals
-- recent food history
-- recipes built from ingredients
-- recipe calorie totals and per-portion calculations
-- pasted recipes and nutritional information from ChatGPT
-- adding a calculated recipe portion to the daily food record
-
-Food-photo calorie estimation was discussed but deliberately deferred. The current version uses entered or pasted information so it remains free and predictable.
-
-### Backup and restore
-
-Elsewhere can export and restore its on-device information, including photo-backed memories where supported.
+Elsewhere can export and restore its on-device information, including food records, recipes, health information, Hugo and sewing progress, saved places, historic memories and locally stored photos where supported.
 
 ## Privacy
 
-Elsewhere is local-first. Personal app information is stored in the browser on the user's device. The GitHub repository contains the app code only—not personal health information, meal records, photographs or memories.
+Elsewhere is local-first. Personal information is stored in the browser on the user's device. The GitHub repository contains the app code only—not personal health information, meal records, photographs or memories.
 
 Clearing browser data, deleting the installed app or changing devices may remove local information unless an Elsewhere backup has been exported.
 
