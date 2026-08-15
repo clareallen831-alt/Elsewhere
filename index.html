@@ -52,5 +52,18 @@
 <script src="./app.js"></script>
 <script src="./photos.js"></script>
 <script src="./achievements.js"></script>
+<script>
+window.addEventListener('load',()=>{
+  const version='20260815-foodlog2';
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register(`./sw.js?v=${version}`,{updateViaCache:'none'}).then(reg=>reg.update()).catch(console.warn);
+  }
+  setTimeout(()=>{
+    const script=document.createElement('script');
+    script.src=`./achievements.js?v=${version}`;
+    document.head.appendChild(script);
+  },500);
+});
+</script>
 </body>
 </html>
