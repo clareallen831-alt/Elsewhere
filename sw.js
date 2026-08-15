@@ -1,4 +1,4 @@
-const CACHE='elsewhere-v11-paste-recipes';
+const CACHE='elsewhere-v12-food-log';
 const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./achievements.js','./achievements-base.js','./project-steps.js','./food.js','./recipe-calculator.js','./recipe-paste.js','./health-v2.js','./health-v2.css','./health-dates.js','./health-push-test.js','./manifest.json','./icon.svg'];
 const DIAG_DB='elsewhere_push_diag_v1', DIAG_STORE='events';
 function openDiagDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DIAG_DB,1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(DIAG_STORE))req.result.createObjectStore(DIAG_STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
@@ -18,9 +18,14 @@ async function withHealth(response){
 }
 self.addEventListener('fetch',event=>{
   if(event.request.mode==='navigate'){
-    event.respondWith((async()=>{try{const raw=await fetch(event.request);const enhanced=await withHealth(raw);const copy=enhanced.clone();caches.open(CACHE).then(c=>c.put('./index.html',copy));return enhanced}catch{const cached=await caches.match('./index.html');return cached||Response.error()}})());return;
+    event.respondWith((async()=>{try{const raw=await fetch(event.request,{cache:'no-cache'});const enhanced=await withHealth(raw);const copy=enhanced.clone();caches.open(CACHE).then(c=>c.put('./index.html',copy));return enhanced}catch{const cached=await caches.match('./index.html');return cached||Response.error()}})());return;
   }
-  event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(event.request,copy));return r})));
+  if(event.request.method!=='GET')return;
+  const url=new URL(event.request.url);
+  if(url.origin===self.location.origin){
+    event.respondWith((async()=>{try{const fresh=await fetch(event.request,{cache:'no-cache'});if(fresh&&fresh.ok){const copy=fresh.clone();caches.open(CACHE).then(c=>c.put(event.request,copy))}return fresh}catch{const cached=await caches.match(event.request);return cached||Response.error()}})());return;
+  }
+  event.respondWith(fetch(event.request).catch(()=>caches.match(event.request)));
 });
 self.addEventListener('push',event=>{
   let data={};try{data=event.data?event.data.json():{}}catch{data={body:event.data?.text()||'Time for your pill.'}}
