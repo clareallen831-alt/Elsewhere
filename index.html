@@ -6,16 +6,16 @@
   <meta name="theme-color" content="#f3f0e8">
   <meta name="description" content="Elsewhere — a little way back to yourself.">
   <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=20260815-phase4b">
-  <link rel="stylesheet" href="./health-v2.css?v=20260815-phase4b">
-  <link rel="stylesheet" href="./phase4.css?v=20260815-phase4b">
+  <link rel="icon" href="./icon-elsewhere.svg?v=20260815-icons" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css?v=20260815-icons">
+  <link rel="stylesheet" href="./health-v2.css?v=20260815-icons">
+  <link rel="stylesheet" href="./phase4.css?v=20260815-icons">
   <title>Elsewhere</title>
 </head>
 <body>
 <div class="shell">
   <header class="top">
-    <button class="brand" data-go="today" aria-label="Go to Today"><span>ELSEWHERE</span><em>A little way back to yourself.</em></button>
+    <button class="brand" data-go="today" aria-label="Go to Home"><img class="brandMark" src="./icon-elsewhere.svg?v=20260815-icons" alt=""><span>ELSEWHERE</span><em>A little way back to yourself.</em></button>
     <button class="iconBtn" id="settingsBtn" aria-label="Settings">☰</button>
   </header>
   <main>
@@ -26,10 +26,10 @@
         <p>Food, health, Hugo, sewing and the things that feel like yours.</p>
       </div>
       <div class="homeGrid" aria-label="Your main areas">
-        <button class="homeCard homeFood" data-go="cook"><b>🍲</b><span><strong>Food</strong><small>Log today, reuse a meal or open a recipe.</small></span><i>→</i></button>
-        <button class="homeCard homeHealth" data-go="health"><b>＋</b><span><strong>Health</strong><small>Medication, symptoms, cycle and treatment.</small></span><i>→</i></button>
-        <button class="homeCard" data-go="hugo"><b>🐕</b><span><strong>Hugo & Me</strong><small>Walks, places and growing confidence.</small></span><i>→</i></button>
-        <button class="homeCard" data-go="sew"><b>🧵</b><span><strong>My Sewing</strong><small>Ideas, equipment and the next small step.</small></span><i>→</i></button>
+        <button class="homeCard homeFood" data-go="cook"><span class="areaIcon areaFood"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11.5h16c-.6 4.6-3.4 7-8 7s-7.4-2.4-8-7Z" fill="currentColor" opacity=".2"/><path d="M4 11.5h16c-.6 4.6-3.4 7-8 7s-7.4-2.4-8-7ZM7.5 20h9M8 8.2c0-1.7 1.4-1.7 1.4-3.4M12 8.2c0-1.7 1.4-1.7 1.4-3.4M16 8.2c0-1.7 1.4-1.7 1.4-3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>Food</strong><small>Log today, reuse a meal or open a recipe.</small></span><i>→</i></button>
+        <button class="homeCard homeHealth" data-go="health"><span class="areaIcon areaHealth"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.2S4.8 16.1 4.8 9.8c0-2.5 1.7-4.2 4-4.2 1.4 0 2.6.7 3.2 1.8.7-1.1 1.9-1.8 3.3-1.8 2.3 0 4 1.7 4 4.2 0 6.3-7.3 10.4-7.3 10.4Z" fill="currentColor" opacity=".16"/><path d="M12 20.2S4.8 16.1 4.8 9.8c0-2.5 1.7-4.2 4-4.2 1.4 0 2.6.7 3.2 1.8.7-1.1 1.9-1.8 3.3-1.8 2.3 0 4 1.7 4 4.2 0 6.3-7.3 10.4-7.3 10.4Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><strong>Health</strong><small>Medication, symptoms, cycle and treatment.</small></span><i>→</i></button>
+        <button class="homeCard" data-go="hugo"><span class="areaIcon areaHugo"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.2 8.3 4.7 6.4c-.8 2.8-.6 5 .7 6.5M16.8 8.3l2.5-1.9c.8 2.8.6 5-.7 6.5" fill="currentColor" opacity=".22"/><path d="M7.2 8.3 4.7 6.4c-.8 2.8-.6 5 .7 6.5M16.8 8.3l2.5-1.9c.8 2.8.6 5-.7 6.5M7.2 8.3C8.2 6.8 9.8 6 12 6s3.8.8 4.8 2.3c.8 1.2 1.1 3 1 5.2-.2 3.1-2.4 5.4-5.8 5.4s-5.6-2.3-5.8-5.4c-.1-2.2.2-4 1-5.2Z" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="12" r=".8" fill="currentColor"/><circle cx="14.5" cy="12" r=".8" fill="currentColor"/><path d="M10.3 15.3c1.1.8 2.3.8 3.4 0M12 14v1" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/></svg></span><span><strong>Hugo & Me</strong><small>Walks, places and growing confidence.</small></span><i>→</i></button>
+        <button class="homeCard" data-go="sew"><span class="areaIcon areaSewing"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 5.5h10l-1 13H8l-1-13Z" fill="currentColor" opacity=".16"/><path d="M7 5.5h10l-1 13H8l-1-13ZM6.5 5.5h11M7.5 18.5h9M9 9h6M8.6 12h6.8M8.3 15h7.4" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 8.5c2 0 2.5 1.3 1.4 2.3-.7.6-1.8.3-1.8-.6" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/></svg></span><span><strong>My Sewing</strong><small>Ideas, equipment and the next small step.</small></span><i>→</i></button>
       </div>
       <button class="homeWide" data-go="things"><span><strong>More of my life</strong><small>Making, places and ideas that can wait.</small></span><i>→</i></button>
       <button class="homeNudge" data-go="choose"><span><small>NOT SURE WHAT YOU NEED?</small><strong>Help me choose something</strong><em>The original gentle suggestion tool is still here when you want it.</em></span><i>→</i></button>
@@ -75,17 +75,17 @@
     <div class="modal hidden" id="modal"><div class="modalCard"><button class="modalClose" id="modalClose">×</button><p class="eyebrow" id="modalEyebrow">ADD SOMETHING</p><h2 id="modalTitle"></h2><div id="modalFields"></div><button class="primary" id="modalSave">Save</button></div></div>
   </main>
 </div>
-<nav class="bottomNav" aria-label="Main navigation"><button class="nav active" data-go="today">⌂<span>Home</span></button><button class="nav" data-go="cook">🍲<span>Food</span></button><button class="nav" data-go="health">＋<span>Health</span></button><button class="nav" data-go="things">♡<span>My Life</span></button></nav>
-<script src="./app.js?v=20260815-phase4b"></script>
-<script src="./photos.js?v=20260815-phase4b"></script>
-<script src="./achievements.js?v=20260815-phase4b"></script>
-<script src="./health-v2.js?v=20260815-phase4b"></script>
-<script src="./health-dates.js?v=20260815-phase4b"></script>
-<script src="./health-push-test.js?v=20260815-phase4b"></script>
-<script src="./phase4.js?v=20260815-phase4b"></script>
+<nav class="bottomNav" aria-label="Main navigation"><button class="nav active" data-go="today"><span class="navIcon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 10.5 12 4l7.5 6.5v8.3H14v-5h-4v5H4.5v-8.3Z" fill="currentColor" opacity=".16"/><path d="M4.5 10.5 12 4l7.5 6.5v8.3H14v-5h-4v5H4.5v-8.3Z" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linejoin="round"/></svg></span><span class="navLabel">Home</span></button><button class="nav" data-go="cook"><span class="navIcon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11.5h16c-.6 4.6-3.4 7-8 7s-7.4-2.4-8-7Z" fill="currentColor" opacity=".2"/><path d="M4 11.5h16c-.6 4.6-3.4 7-8 7s-7.4-2.4-8-7ZM7.5 20h9M8 8.2c0-1.7 1.4-1.7 1.4-3.4M12 8.2c0-1.7 1.4-1.7 1.4-3.4M16 8.2c0-1.7 1.4-1.7 1.4-3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="navLabel">Food</span></button><button class="nav" data-go="health"><span class="navIcon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.2S4.8 16.1 4.8 9.8c0-2.5 1.7-4.2 4-4.2 1.4 0 2.6.7 3.2 1.8.7-1.1 1.9-1.8 3.3-1.8 2.3 0 4 1.7 4 4.2 0 6.3-7.3 10.4-7.3 10.4Z" fill="currentColor" opacity=".16"/><path d="M12 20.2S4.8 16.1 4.8 9.8c0-2.5 1.7-4.2 4-4.2 1.4 0 2.6.7 3.2 1.8.7-1.1 1.9-1.8 3.3-1.8 2.3 0 4 1.7 4 4.2 0 6.3-7.3 10.4-7.3 10.4Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="navLabel">Health</span></button><button class="nav" data-go="things"><span class="navIcon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20c-4.2-2.3-7.2-5-7.2-8.5 0-2.5 1.8-4.2 4.1-4.2 1.4 0 2.5.7 3.1 1.8.7-1.1 1.8-1.8 3.2-1.8 2.3 0 4.1 1.7 4.1 4.2C19.3 15 16.2 17.7 12 20Z" fill="currentColor" opacity=".18"/><path d="M12 20c-4.2-2.3-7.2-5-7.2-8.5 0-2.5 1.8-4.2 4.1-4.2 1.4 0 2.5.7 3.1 1.8.7-1.1 1.8-1.8 3.2-1.8 2.3 0 4.1 1.7 4.1 4.2C19.3 15 16.2 17.7 12 20Z" fill="none" stroke="currentColor" stroke-width="1.55"/></svg></span><span class="navLabel">My Life</span></button></nav>
+<script src="./app.js?v=20260815-icons"></script>
+<script src="./photos.js?v=20260815-icons"></script>
+<script src="./achievements.js?v=20260815-icons"></script>
+<script src="./health-v2.js?v=20260815-icons"></script>
+<script src="./health-dates.js?v=20260815-icons"></script>
+<script src="./health-push-test.js?v=20260815-icons"></script>
+<script src="./phase4.js?v=20260815-icons"></script>
 <script>
 window.addEventListener('load',()=>{
-  const version='20260815-phase4b';
+  const version='20260815-icons';
   if('serviceWorker' in navigator){
     navigator.serviceWorker.register(`./sw.js?v=${version}`,{updateViaCache:'none'}).then(reg=>reg.update()).catch(console.warn);
   }

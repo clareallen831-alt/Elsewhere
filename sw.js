@@ -1,5 +1,5 @@
-const CACHE='elsewhere-v14-phase4b';
-const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./achievements.js','./achievements-base.js','./project-steps.js','./food.js','./food-extras.js','./backup.js','./recipe-calculator.js','./recipe-paste.js','./health-v2.js','./health-v2.css','./health-dates.js','./health-push-test.js','./phase4.js','./phase4.css','./manifest.json','./icon.svg'];
+const CACHE='elsewhere-v15-icons';
+const ASSETS=['./','./index.html','./styles.css','./app.js','./photos.js','./achievements.js','./achievements-base.js','./project-steps.js','./food.js','./food-extras.js','./backup.js','./recipe-calculator.js','./recipe-paste.js','./health-v2.js','./health-v2.css','./health-dates.js','./health-push-test.js','./phase4.js','./phase4.css','./manifest.json','./icon.svg','./icon-elsewhere.svg'];
 const DIAG_DB='elsewhere_push_diag_v1', DIAG_STORE='events';
 function openDiagDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DIAG_DB,1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(DIAG_STORE))req.result.createObjectStore(DIAG_STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
 async function recordPush(data){try{const db=await openDiagDb();await new Promise((resolve,reject)=>{const tx=db.transaction(DIAG_STORE,'readwrite');tx.objectStore(DIAG_STORE).put({receivedAt:Date.now(),tag:data?.tag||'elsewhere-reminder'},'lastPush');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}catch{}}
@@ -33,7 +33,7 @@ self.addEventListener('push',event=>{
     recordPush(data),
     self.registration.showNotification(data.title||'Elsewhere reminder',{
       body:data.body||'Time for your daily pill.',
-      icon:'./icon.svg',badge:'./icon.svg',tag:data.tag||'elsewhere-reminder',requireInteraction:true,
+      icon:'./icon-elsewhere.svg',badge:'./icon-elsewhere.svg',tag:data.tag||'elsewhere-reminder',requireInteraction:true,
       renotify:true,vibrate:[250,120,250],timestamp:Date.now(),
       data:{url:data.url||'./index.html?health=medication'}
     })

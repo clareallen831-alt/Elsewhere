@@ -1,7 +1,7 @@
 {
   "name": "Elsewhere",
   "short_name": "Elsewhere",
-  "description": "A little way back to yourself.",
+  "description": "A quiet place for food, health and the parts of life that are yours.",
   "start_url": "./index.html",
   "scope": "./",
   "id": "./index.html",
@@ -10,6 +10,6 @@
   "background_color": "#f3f0e8",
   "theme_color": "#f3f0e8",
   "icons": [
-    {"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+    {"src":"./icon-elsewhere.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
   ]
 }
