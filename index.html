@@ -7,7 +7,9 @@
   <meta name="description" content="Elsewhere — a little way back to yourself.">
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=20260815-phase4">
+  <link rel="stylesheet" href="./health-v2.css?v=20260815-phase4">
+  <link rel="stylesheet" href="./phase4.css?v=20260815-phase4">
   <title>Elsewhere</title>
 </head>
 <body>
@@ -17,7 +19,22 @@
     <button class="iconBtn" id="settingsBtn" aria-label="Settings">☰</button>
   </header>
   <main>
-    <section class="view active" id="today">
+    <section class="view active homeView" id="today">
+      <div class="hero homeHero">
+        <p class="eyebrow" id="homeDayLabel">YOUR ELSEWHERE</p>
+        <h1>The things that help you look after <i>your life.</i></h1>
+        <p>Food, health, Hugo, sewing and the things that feel like yours.</p>
+      </div>
+      <div class="homeGrid" aria-label="Your main areas">
+        <button class="homeCard homeFood" data-go="cook"><b>🍲</b><span><strong>Food</strong><small>Log today, reuse a meal or open a recipe.</small></span><i>→</i></button>
+        <button class="homeCard homeHealth" data-go="health"><b>＋</b><span><strong>Health</strong><small>Medication, symptoms, cycle and treatment.</small></span><i>→</i></button>
+        <button class="homeCard" data-go="hugo"><b>🐕</b><span><strong>Hugo & Me</strong><small>Walks, places and growing confidence.</small></span><i>→</i></button>
+        <button class="homeCard" data-go="sew"><b>🧵</b><span><strong>My Sewing</strong><small>Ideas, equipment and the next small step.</small></span><i>→</i></button>
+      </div>
+      <button class="homeWide" data-go="things"><span><strong>More of my life</strong><small>Making, places and ideas that can wait.</small></span><i>→</i></button>
+      <button class="homeNudge" data-go="choose"><span><small>NOT SURE WHAT YOU NEED?</small><strong>Help me choose something</strong><em>The original gentle suggestion tool is still here when you want it.</em></span><i>→</i></button>
+    </section>
+    <section class="view" id="choose">
       <div class="hero"><p class="eyebrow" id="dayLabel">TODAY</p><h1>What would make today feel <i>2% more like yours?</i></h1><p>No productivity points. No streaks. Just a little help choosing what comes next.</p></div>
       <div class="contextRow"><button class="pill context selected" data-v="work">Workday</button><button class="pill context" data-v="off">Day off</button></div>
       <div class="card"><div class="stepHead"><span>1</span><div><p class="eyebrow">RIGHT NOW</p><h2>How much have you got in you?</h2></div></div><div class="twoGrid"><button class="choice energy" data-v="empty"><b>🪫</b><strong>Running on empty</strong><small>Almost nothing</small></button><button class="choice energy" data-v="little"><b>🌤</b><strong>A little</strong><small>Don't make me think</small></button><button class="choice energy" data-v="some"><b>🌱</b><strong>A bit of life</strong><small>I could do something</small></button><button class="choice energy" data-v="good"><b>✨</b><strong>Feeling good</strong><small>Give me something nice</small></button></div></div>
@@ -28,12 +45,22 @@
       <div class="escapeBox"><div><p class="eyebrow light">NO DECISIONS</p><h2>Get me off my phone</h2><small>One tiny prompt. Immediately.</small></div><button class="escape" id="escapeBtn">Do it</button></div><button class="nothing" id="nothingBtn">I don't feel like doing anything</button>
     </section>
 
-    <section class="view" id="activity"><button class="back" data-go="today">← Back</button><div class="activityCard"><div class="topline"><span class="tag" id="activityTag"></span><span id="activityDuration" class="muted"></span></div><h1 id="activityTitle"></h1><p id="activityBody" class="activityBody"></p><div class="permission" id="activityPermission"></div><div class="prefRow"><button class="mini" id="loveActivity">♡ Loved this</button><button class="mini" id="saveActivity">🔖 Save for later</button><button class="mini" id="blockActivity">🚫 Not for me</button></div><button class="lock" id="lockBtn">▣ Put this on my lock screen</button><p class="muted small" id="lockNote">Close your phone and go do it. Elsewhere will wait.</p><div class="actionGrid"><button class="secondary" id="anotherBtn">Give me another</button><button class="primary" id="doneBtn">I did it</button></div><button class="textBtn" id="notDoneBtn">I haven't done it</button></div></section>
-    <section class="view" id="evening"><button class="back" data-go="today">← Back</button><div class="hero compact"><p class="eyebrow">TONIGHT</p><h1>A little shape for your evening.</h1><p>Take what helps. Ignore the rest.</p></div><div id="eveningPlan" class="planList"></div><div class="actionGrid"><button class="secondary" id="easierEvening">Make it easier</button><button class="secondary" id="interestingEvening">Make it more interesting</button></div><button class="lock" id="lockEvening">▣ Put this plan on my lock screen</button><button class="primary" id="eveningDone">That feels good</button></section>
+    <section class="view" id="activity"><button class="back" data-go="choose">← Choose something</button><div class="activityCard"><div class="topline"><span class="tag" id="activityTag"></span><span id="activityDuration" class="muted"></span></div><h1 id="activityTitle"></h1><p id="activityBody" class="activityBody"></p><div class="permission" id="activityPermission"></div><div class="prefRow"><button class="mini" id="loveActivity">♡ Loved this</button><button class="mini" id="saveActivity">🔖 Save for later</button><button class="mini" id="blockActivity">🚫 Not for me</button></div><button class="lock" id="lockBtn">▣ Put this on my lock screen</button><p class="muted small" id="lockNote">Close your phone and go do it. Elsewhere will wait.</p><div class="actionGrid"><button class="secondary" id="anotherBtn">Give me another</button><button class="primary" id="doneBtn">I did it</button></div><button class="textBtn" id="notDoneBtn">I haven't done it</button></div></section>
+    <section class="view" id="evening"><button class="back" data-go="choose">← Choose something</button><div class="hero compact"><p class="eyebrow">TONIGHT</p><h1>A little shape for your evening.</h1><p>Take what helps. Ignore the rest.</p></div><div id="eveningPlan" class="planList"></div><div class="actionGrid"><button class="secondary" id="easierEvening">Make it easier</button><button class="secondary" id="interestingEvening">Make it more interesting</button></div><button class="lock" id="lockEvening">▣ Put this plan on my lock screen</button><button class="primary" id="eveningDone">That feels good</button></section>
     <section class="view" id="notDone"><button class="back" data-go="today">← Home</button><div class="activityCard"><p class="eyebrow">NO PUNISHMENT</p><h1>It didn't happen today.</h1><p class="muted">That is information, not failure. Nothing bad happens.</p><div class="permission">You are allowed to try again another day — or decide this one wasn't for you.</div><button class="primary" id="smallerBtn">Give me something smaller</button><button class="textBtn" data-go="today">Leave it for today</button></div></section>
-    <section class="view" id="complete"><button class="back" data-go="today">← Home</button><div class="activityCard"><p class="eyebrow">THAT COUNTS</p><h1>You did it your way.</h1><p class="muted">It didn't have to be brilliant. It only had to happen.</p><textarea id="completionNote" rows="4" placeholder="Made progress, hated it, laughed, turned around early… all valid."></textarea><div class="feel" id="completionFeel"><button data-v="loved">❤️ Loved it</button><button data-v="good">🙂 Good</button><button data-v="meh">😐 Meh</button><button data-v="hard">😬 Hard</button></div><p class="fieldLabel">Would you do this again?</p><div class="feel" id="completionAgain"><button data-v="yes">❤️ Definitely</button><button data-v="probably">🙂 Probably</button><button data-v="maybe">🤷 Maybe</button><button data-v="no">🙅 No</button></div><label class="photoPick">📷 Add a photo <input type="file" id="completionPhoto" accept="image/*"></label><label class="checkLine"><input type="checkbox" id="completionSafe"> This felt like proof I was safe</label><button class="primary" id="saveCompletion">Save to Look at me now</button><button class="textBtn" data-go="today">Done — don't save anything</button></div></section>
+    <section class="view" id="complete"><button class="back" data-go="today">← Home</button><div class="activityCard"><p class="eyebrow">THAT COUNTS</p><h1>You did it your way.</h1><p class="muted">It didn't have to be brilliant. It only had to happen.</p><textarea id="completionNote" rows="4" placeholder="Made progress, hated it, laughed, turned around early… all valid."></textarea><div class="feel" id="completionFeel"><button data-v="loved">❤️ Loved it</button><button data-v="good">🙂 Good</button><button data-v="meh">😐 Meh</button><button data-v="hard">😬 Hard</button></div><p class="fieldLabel">Would you do this again?</p><div class="feel" id="completionAgain"><button data-v="yes">❤️ Definitely</button><button data-v="probably">🙂 Probably</button><button data-v="maybe">🤷 Maybe</button><button data-v="no">🙅 No</button></div><label class="photoPick">📷 Add a photo <input type="file" id="completionPhoto" accept="image/*"></label><label class="checkLine"><input type="checkbox" id="completionSafe"> This felt like proof I was safe</label><button class="primary" id="saveCompletion">Save and return home</button><button class="textBtn" data-go="today">Done — don't save anything</button></div></section>
 
-    <section class="view" id="things"><div class="sectionIntro"><p class="eyebrow">MY THINGS</p><h1>The bits of life you're growing.</h1><p>Not goals to complete. Places to return to.</p></div><div class="thingGrid"><button class="thing" data-go="cook"><b>🍲</b><span><strong>Our Food</strong><small>Meals you know, love and want to try.</small></span></button><button class="thing" data-go="hugo"><b>🐕</b><span><strong>Hugo & Me</strong><small>Little outings and growing confidence.</small></span></button><button class="thing" data-go="sew"><b>🧵</b><span><strong>My Sewing</strong><small>Start small. Make things badly.</small></span></button><button class="thing" data-go="make"><b>🎨</b><span><strong>Make</strong><small>Design, photograph, play.</small></span></button><button class="thing" data-go="explore"><b>🌿</b><span><strong>My Places</strong><small>A private atlas of places worth remembering.</small></span></button></div></section>
+    <section class="view" id="things">
+      <div class="sectionIntro"><p class="eyebrow">MY LIFE</p><h1>The parts of life that are yours.</h1><p>Places to return to, with no pressure to complete them.</p></div>
+      <div class="thingGrid">
+        <button class="thing" data-go="hugo"><b>🐕</b><span><strong>Hugo & Me</strong><small>Little outings and growing confidence.</small></span></button>
+        <button class="thing" data-go="sew"><b>🧵</b><span><strong>My Sewing</strong><small>Equipment, ideas and projects in progress.</small></span></button>
+        <button class="thing" data-go="make"><b>🎨</b><span><strong>Make</strong><small>Design, photograph and play.</small></span></button>
+        <button class="thing" data-go="explore"><b>🌿</b><span><strong>My Places</strong><small>Places found and places still to explore.</small></span></button>
+        <button class="thing" data-go="ideas"><b>✦</b><span><strong>Ideas</strong><small>Recipes, patterns, books and maybe-one-day things.</small></span></button>
+        <button class="thing nudgeThing" data-go="choose"><b>☁</b><span><strong>Help me choose something</strong><small>One gentle suggestion when you feel stuck.</small></span></button>
+      </div>
+    </section>
     <section class="view" id="cook"><button class="back" data-go="things">← My Things</button><div class="sectionIntro"><p class="eyebrow">OUR FOOD</p><h1>Food you can actually imagine cooking.</h1><p>Real ingredients. Plenty of plants and protein. No diet punishment.</p></div><div class="featureCard" id="dinnerCard"></div><h2 class="sectionTitle">Things I can cook</h2><div id="canCookList" class="stack"></div><h2 class="sectionTitle">Want to try</h2><div id="foodIdeas" class="stack"></div><button class="secondary full" id="addFoodIdea">+ Save a meal idea</button></section>
     <section class="view" id="hugo"><button class="back" data-go="things">← My Things</button><div class="sectionIntro"><p class="eyebrow">HUGO & ME</p><h1>Confidence built in ordinary outings.</h1><p>Turning around counts. Choosing to go counts.</p></div><div class="subtabs" id="hugoTabs"><button class="selected" data-tab="tiny">Tiny walks</button><button data-tab="familiar">Familiar</button><button data-tab="brave">Feeling brave</button></div><div id="hugoSuggestions" class="stack"></div><div class="card"><p class="eyebrow">MY CONFIDENCE WITH HUGO</p><h2>Little pieces of evidence</h2><div id="hugoConfidence" class="checkStack"></div></div><div class="card"><p class="eyebrow">PLACES</p><h2>Somewhere for us</h2><div id="hugoPlaces" class="stack"></div><button class="secondary full" id="addHugoPlace">+ Add a place</button></div></section>
     <section class="view" id="sew"><button class="back" data-go="things">← My Things</button><div class="sectionIntro"><p class="eyebrow">MY SEWING</p><h1>Become someone who sews again.</h1><p>The garment is not the task. The next tiny step is.</p></div><div class="card"><p class="eyebrow">EQUIPMENT I NEED</p><div id="sewEquipment" class="checkStack"></div><button class="secondary full" id="addEquipment">+ Add equipment</button></div><div class="card"><p class="eyebrow">THINGS I'D LOVE TO MAKE</p><div id="sewWishlist" class="stack"></div><button class="secondary full" id="addSewWish">+ Add something</button></div><div class="card"><p class="eyebrow">THINGS I'M MAKING</p><div id="sewProjects" class="stack"></div><button class="secondary full" id="addSewProject">+ Start a project</button></div></section>
@@ -48,21 +75,20 @@
     <div class="modal hidden" id="modal"><div class="modalCard"><button class="modalClose" id="modalClose">×</button><p class="eyebrow" id="modalEyebrow">ADD SOMETHING</p><h2 id="modalTitle"></h2><div id="modalFields"></div><button class="primary" id="modalSave">Save</button></div></div>
   </main>
 </div>
-<nav class="bottomNav"><button class="nav active" data-go="today">⌂<span>Today</span></button><button class="nav" data-go="things">♡<span>My Things</span></button><button class="nav" data-go="ideas">✦<span>Ideas</span></button><button class="nav" data-go="look">◌<span>Look at me now</span></button></nav>
-<script src="./app.js"></script>
-<script src="./photos.js"></script>
-<script src="./achievements.js"></script>
+<nav class="bottomNav" aria-label="Main navigation"><button class="nav active" data-go="today">⌂<span>Home</span></button><button class="nav" data-go="cook">🍲<span>Food</span></button><button class="nav" data-go="health">＋<span>Health</span></button><button class="nav" data-go="things">♡<span>My Life</span></button></nav>
+<script src="./app.js?v=20260815-phase4"></script>
+<script src="./photos.js?v=20260815-phase4"></script>
+<script src="./achievements.js?v=20260815-phase4"></script>
+<script src="./health-v2.js?v=20260815-phase4"></script>
+<script src="./health-dates.js?v=20260815-phase4"></script>
+<script src="./health-push-test.js?v=20260815-phase4"></script>
+<script src="./phase4.js?v=20260815-phase4"></script>
 <script>
 window.addEventListener('load',()=>{
-  const version='20260815-foodlog2';
+  const version='20260815-phase4';
   if('serviceWorker' in navigator){
     navigator.serviceWorker.register(`./sw.js?v=${version}`,{updateViaCache:'none'}).then(reg=>reg.update()).catch(console.warn);
   }
-  setTimeout(()=>{
-    const script=document.createElement('script');
-    script.src=`./achievements.js?v=${version}`;
-    document.head.appendChild(script);
-  },500);
 });
 </script>
 </body>
