@@ -7,9 +7,9 @@
   <meta name="description" content="Elsewhere — a little way back to yourself.">
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=20260815-phase4">
-  <link rel="stylesheet" href="./health-v2.css?v=20260815-phase4">
-  <link rel="stylesheet" href="./phase4.css?v=20260815-phase4">
+  <link rel="stylesheet" href="./styles.css?v=20260815-phase4b">
+  <link rel="stylesheet" href="./health-v2.css?v=20260815-phase4b">
+  <link rel="stylesheet" href="./phase4.css?v=20260815-phase4b">
   <title>Elsewhere</title>
 </head>
 <body>
@@ -76,16 +76,16 @@
   </main>
 </div>
 <nav class="bottomNav" aria-label="Main navigation"><button class="nav active" data-go="today">⌂<span>Home</span></button><button class="nav" data-go="cook">🍲<span>Food</span></button><button class="nav" data-go="health">＋<span>Health</span></button><button class="nav" data-go="things">♡<span>My Life</span></button></nav>
-<script src="./app.js?v=20260815-phase4"></script>
-<script src="./photos.js?v=20260815-phase4"></script>
-<script src="./achievements.js?v=20260815-phase4"></script>
-<script src="./health-v2.js?v=20260815-phase4"></script>
-<script src="./health-dates.js?v=20260815-phase4"></script>
-<script src="./health-push-test.js?v=20260815-phase4"></script>
-<script src="./phase4.js?v=20260815-phase4"></script>
+<script src="./app.js?v=20260815-phase4b"></script>
+<script src="./photos.js?v=20260815-phase4b"></script>
+<script src="./achievements.js?v=20260815-phase4b"></script>
+<script src="./health-v2.js?v=20260815-phase4b"></script>
+<script src="./health-dates.js?v=20260815-phase4b"></script>
+<script src="./health-push-test.js?v=20260815-phase4b"></script>
+<script src="./phase4.js?v=20260815-phase4b"></script>
 <script>
 window.addEventListener('load',()=>{
-  const version='20260815-phase4';
+  const version='20260815-phase4b';
   if('serviceWorker' in navigator){
     navigator.serviceWorker.register(`./sw.js?v=${version}`,{updateViaCache:'none'}).then(reg=>reg.update()).catch(console.warn);
   }
