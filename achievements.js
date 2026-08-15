@@ -1,7 +1,8 @@
 (() => {
+  const VERSION='20260815-foodlog2';
   const load=src=>new Promise((resolve,reject)=>{
     const script=document.createElement('script');
-    script.src=src;
+    script.src=`${src}?v=${VERSION}`;
     script.onload=resolve;
     script.onerror=reject;
     document.head.appendChild(script);
