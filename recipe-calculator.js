@@ -8,7 +8,7 @@
   const round=v=>Math.round(n(v));
   const norm=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
 
-  // Approximate kcal per 100g. These are deliberately editable in the recipe builder.
+  // Approximate kcal per 100g. Values remain editable in the builder.
   // Density is grams per ml; each is an approximate edible weight in grams.
   const common=[
     {name:'Chicken breast',kcal:120,aliases:['chicken breast fillet']},{name:'Chicken thighs, skinless',kcal:150,aliases:['chicken thigh']},{name:'Beef mince 5%',kcal:137,aliases:['lean beef mince']},{name:'Beef mince 10%',kcal:176},{name:'Turkey mince',kcal:140},{name:'Pork mince',kcal:180},{name:'Salmon',kcal:208},{name:'White fish',kcal:90,aliases:['cod','haddock']},{name:'Prawns',kcal:85,aliases:['shrimp']},{name:'Tuna, canned in spring water',kcal:116,aliases:['tinned tuna']},{name:'Egg',kcal:143,each:58,aliases:['eggs']},{name:'Tofu',kcal:144},
@@ -57,8 +57,8 @@
     row.innerHTML=`<div class="recipeIngredientHead"><input data-role="name" list="elsewhereIngredientList" placeholder="Ingredient — e.g. chicken breast"><button class="recipeRemove" type="button" aria-label="Remove ingredient">×</button></div><div class="recipeIngredientNumbers"><input data-role="amount" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Amount"><select data-role="unit"><option value="g">g</option><option value="kg">kg</option><option value="ml">ml</option><option value="tsp">tsp</option><option value="tbsp">tbsp</option><option value="each">item</option></select><input data-role="kcal" type="number" inputmode="decimal" min="0" step="0.1" placeholder="kcal / 100g"></div><div class="recipeIngredientMeta"><span data-role="hint">Choose a common ingredient or enter the packet value.</span><strong data-role="total">0 kcal</strong></div>`;
     const name=row.querySelector('[data-role="name"]'),amount=row.querySelector('[data-role="amount"]'),unit=row.querySelector('[data-role="unit"]'),kcal=row.querySelector('[data-role="kcal"]'),hint=row.querySelector('[data-role="hint"]');
     const applyMatch=()=>{const food=findFood(name.value);if(food){row.dataset.food=food.name;kcal.value=food.kcal;hint.textContent=`Estimate: ${food.kcal} kcal per 100g${food.each?' · item weight known':''}`;}else{delete row.dataset.food;hint.textContent='Not in the built-in list — enter kcal per 100g from the packet or recipe.';}updateRecipe(row.closest('.recipeBuilderCard'))};
-    name.addEventListener('change',applyMatch);name.addEventListener('blur',applyMatch);[amount,unit,kcal].forEach(x=>x.addEventListener('input',()=>updateRecipe(row.closest('.recipeBuilderCard'))));unit.addEventListener('change',()=>updateRecipe(row.closest('.recipeBuilderCard')));
-    row.querySelector('.recipeRemove').onclick=()=>{row.remove();updateRecipe(row.closest('.recipeBuilderCard'))};
+    name.addEventListener('change',applyMatch);name.addEventListener('blur',applyMatch);[amount,kcal].forEach(x=>x.addEventListener('input',()=>updateRecipe(row.closest('.recipeBuilderCard'))));unit.addEventListener('change',()=>updateRecipe(row.closest('.recipeBuilderCard')));
+    row.querySelector('.recipeRemove').onclick=()=>{const card=row.closest('.recipeBuilderCard');row.remove();updateRecipe(card)};
     return row;
   }
 
