@@ -81,8 +81,11 @@
 
   function renderHistory(){
     const root=$x('#foodHistoryList');if(!root)return;
-    const open=new Set($$x('#foodHistoryList details[open]').map(d=>d.dataset.day));
-    const s=state();
+    const s=state(),keys=Array.from({length:7},(_,i)=>pastKey(i+1));
+    const relevant=s.entries.filter(e=>keys.includes(e.dateKey)).map(e=>[e.id,e.dateKey,e.name,round(e.calories),normalMeal(e.mealType)]);
+    const signature=JSON.stringify(relevant);
+    if(root.dataset.signature===signature)return;
+    const open=new Set($$x('#foodHistoryList details[open]').map(d=>d.dataset.day));root.dataset.signature=signature;
     root.innerHTML=Array.from({length:7},(_,i)=>i+1).map(i=>{
       const key=pastKey(i),items=s.entries.filter(e=>e.dateKey===key),total=items.reduce((a,e)=>a+round(e.calories),0),label=prettyDate(key,i);
       return `<details class="foodHistoryDay" data-day="${key}" ${open.has(key)?'open':''}><summary><span><strong>${esc(label)}</strong><small>${esc(key.split('-').reverse().join('/'))}</small></span><b class="foodHistoryTotal">${items.length?`${total.toLocaleString()} kcal`:'No entries'}</b></summary><div class="foodHistoryBody">${historyRows(items)}<button class="foodHistoryAdd" data-history-add="${key}">+ Add something to this day</button></div></details>`;
@@ -108,7 +111,16 @@
   let queued=false;
   function enhance(){queued=false;injectStyles();organiseActions();ensureHistory()}
   function queue(){if(queued)return;queued=true;setTimeout(enhance,0)}
-  const cook=$x('#cook');if(cook)new MutationObserver(queue).observe(cook,{childList:true,subtree:true});
+  const cook=$x('#cook');
+  if(cook)new MutationObserver(mutations=>{
+    const relevant=mutations.some(m=>{
+      const added=[...m.addedNodes].some(n=>n.nodeType===1&&(n.id==='foodPasteRecipe'||n.querySelector?.('#foodPasteRecipe')));if(added)return true;
+      if(m.target.closest?.('#foodHistorySection'))return false;
+      if(m.target.closest?.('#foodActionSections'))return false;
+      return true;
+    });
+    if(relevant)queue();
+  }).observe(cook,{childList:true,subtree:true});
   document.addEventListener('click',e=>{if(e.target.closest?.('[data-go="cook"]'))setTimeout(queue,30)},true);
   setTimeout(queue,80);
 })();
