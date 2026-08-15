@@ -7,5 +7,5 @@
     document.head.appendChild(script);
   });
   load('./achievements-base.js').then(()=>load('./project-steps.js')).catch(console.error);
-  load('./food.js').catch(console.error);
+  load('./food.js').then(()=>load('./recipe-calculator.js')).catch(console.error);
 })();
