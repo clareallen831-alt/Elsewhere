@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Elsewhere">
+  <rect width="512" height="512" fill="#344b3c"/>
+  <g fill="none" stroke="#f3f0e8" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M178 136v240"/>
+    <path d="M178 136h166"/>
+    <path d="M178 256h132"/>
+    <path d="M178 376h166"/>
+  </g>
+</svg>
