@@ -42,6 +42,17 @@
     serverTest();
   },true);
 
+  // If Spring/Summer was the last selected wardrobe, restore it after returning to Fashion.
+  document.addEventListener('click',e=>{
+    const target=e.target.closest?.('.nav[data-go="fashion"], [data-fashion-link]');
+    if(!target)return;
+    setTimeout(()=>{
+      if(localStorage.getItem('elsewhere_fashion_season_v1')!=='ss')return;
+      const tab=localStorage.getItem('elsewhere_fashion_tab_v1')||'capsule';
+      document.querySelector(`[data-fashion-tab="${tab}"]`)?.click();
+    },40);
+  });
+
   const style=document.createElement('style');
   style.textContent=`#reminderStatus[data-kind="error"]{color:#8b4a42}#reminderStatus[data-kind="ok"]{color:#344b3c;font-weight:700}#reminderStatus[data-kind="working"]{opacity:.75}`;
   document.head.appendChild(style);
