@@ -1,5 +1,5 @@
 (() => {
-  const VERSION='20260816-favourites1';
+  const VERSION='20260816-favourites2';
   const load=src=>new Promise((resolve,reject)=>{
     const script=document.createElement('script');
     script.src=`${src}?v=${VERSION}`;
