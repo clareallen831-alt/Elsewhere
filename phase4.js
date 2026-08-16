@@ -3,6 +3,7 @@
     today:'today',
     cook:'cook',
     health:'health',
+    fashion:'fashion',
     things:'things',
     hugo:'things',
     sew:'things',
@@ -16,7 +17,27 @@
     complete:'things'
   }[id] || '');
 
+  const illustratedNav = {
+    today:'./illustrations/ui/nav-home.webp',
+    cook:'./illustrations/ui/nav-food.webp',
+    health:'./illustrations/ui/nav-health.webp',
+    fashion:'./illustrations/ui/nav-fashion.webp',
+    things:'./illustrations/ui/nav-mylife.webp'
+  };
+
+  function applyIllustratedNavIcons() {
+    document.querySelectorAll('.bottomNav .nav[data-go]').forEach(button => {
+      const src = illustratedNav[button.dataset.go];
+      const slot = button.querySelector('.navIcon');
+      if (!src || !slot || slot.dataset.elsewhereIllustrated === 'true') return;
+      slot.innerHTML = `<img src="${src}" alt="" aria-hidden="true">`;
+      slot.dataset.elsewhereIllustrated = 'true';
+      slot.classList.add('illustratedNavIcon');
+    });
+  }
+
   function syncNavigation() {
+    applyIllustratedNavIcons();
     const active = document.querySelector('.view.active');
     const target = navTarget(active?.id);
     document.querySelectorAll('.bottomNav .nav').forEach(button => {
@@ -45,6 +66,12 @@
     attributes:true,
     subtree:true,
     attributeFilter:['class']
+  });
+
+  const nav = document.querySelector('.bottomNav');
+  if (nav) new MutationObserver(syncNavigation).observe(nav, {
+    childList:true,
+    subtree:true
   });
 
   const dateLabel = document.querySelector('#homeDayLabel');
