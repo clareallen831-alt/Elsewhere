@@ -3,7 +3,7 @@
   const ROOT_ID='foodFavouritesWrap';
   let scheduled=false;
 
-  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
   const uid=()=>`fav-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
   const num=v=>Number.isFinite(Number(v))?Number(v):0;
   const round=v=>Math.round(num(v));
@@ -73,15 +73,33 @@
     wrap.querySelectorAll('[data-food-favourite-toggle]').forEach(b=>b.onclick=()=>toggleSavedFavourite(b.dataset.foodFavouriteToggle));
   }
 
+  function setEntryHeart(button,entry,s){
+    if(!button||!entry)return;
+    const meal=findMealForEntry(s,entry),fav=Boolean(meal?.favourite);
+    const symbol=fav?'♥':'♡';if(button.textContent!==symbol)button.textContent=symbol;
+    button.classList.toggle('isFavourite',fav);
+    button.setAttribute('aria-label',fav?`${entry.name} is a favourite`:`Add ${entry.name} to favourites`);
+    button.title=fav?'Favourite':'Add to Favourites';
+    button.onclick=e=>{e.preventDefault();e.stopPropagation();fav?toggleSavedFavourite(meal.id):favouriteEntry(entry.id)};
+  }
+
   function decorateToday(s){
     document.querySelectorAll('#foodTodayList .foodEntry').forEach(row=>{
       const edit=row.querySelector('[data-food-edit-entry]'),actions=row.querySelector('.foodEntryActions');if(!edit||!actions)return;
       const entry=s.entries.find(e=>e.id===edit.dataset.foodEditEntry);if(!entry)return;
-      const meal=findMealForEntry(s,entry),fav=Boolean(meal?.favourite);let button=actions.querySelector('[data-food-favourite-entry]');
-      if(!button){button=document.createElement('button');button.dataset.foodFavouriteEntry=entry.id;actions.prepend(button)}
-      const symbol=fav?'♥':'♡';if(button.textContent!==symbol)button.textContent=symbol;
-      button.className=`foodFavouriteButton${fav?' isFavourite':''}`;button.setAttribute('aria-label',fav?`${entry.name} is a favourite`:`Add ${entry.name} to favourites`);button.title=fav?'Favourite':'Add to Favourites';
-      button.onclick=()=>fav?toggleSavedFavourite(meal.id):favouriteEntry(entry.id);
+      let button=actions.querySelector('[data-food-favourite-entry]');
+      if(!button){button=document.createElement('button');button.dataset.foodFavouriteEntry=entry.id;button.className='foodFavouriteButton';actions.prepend(button)}
+      setEntryHeart(button,entry,s);
+    });
+  }
+
+  function decorateHistory(s){
+    document.querySelectorAll('#foodHistoryList .foodHistoryEntry').forEach(row=>{
+      const edit=row.querySelector('[data-history-edit]'),actions=row.querySelector('.foodHistoryEntryActions');if(!edit||!actions)return;
+      const entry=s.entries.find(e=>e.id===edit.dataset.historyEdit);if(!entry)return;
+      let button=actions.querySelector('[data-history-favourite-entry]');
+      if(!button){button=document.createElement('button');button.dataset.historyFavouriteEntry=entry.id;button.className='foodFavouriteButton foodHistoryFavouriteButton';actions.prepend(button)}
+      setEntryHeart(button,entry,s);
     });
   }
 
@@ -99,12 +117,12 @@
   function injectStyles(){
     if(document.querySelector('#elsewhereFoodFavouriteStyles'))return;
     const style=document.createElement('style');style.id='elsewhereFoodFavouriteStyles';style.textContent=`
-      .foodFavouriteHead{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:24px 2px 9px}.foodFavouriteHead .sectionTitle{margin:1px 0 0}.foodFavouriteHead .eyebrow{margin:0}.foodFavouriteHead>span{font-size:.72rem;color:#7a827b;margin-bottom:3px}.foodFavouriteHint{background:#f2eee4;border:1px solid rgba(93,85,75,.08);border-radius:15px;padding:11px 13px;color:#70695e;font-size:.78rem;line-height:1.4;margin-bottom:9px}.foodFavouriteCard{border-color:#d7d1bd;background:linear-gradient(145deg,#fffdf8,#faf5e9)}.foodFavouriteButton,.foodSavedHeart{border:0;background:transparent!important;color:#9a6755!important;font-size:1.2rem!important;line-height:1!important;padding:6px!important;min-width:30px;cursor:pointer}.foodFavouriteButton.isFavourite,.foodSavedHeart.isFavourite{color:#9b5f4c!important}.foodSavedHeart{margin-left:auto;align-self:flex-start;font-size:1.35rem!important}.foodFavouriteToast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:13000;background:#344b3c;color:white;border-radius:999px;padding:10px 15px;box-shadow:0 8px 30px rgba(0,0,0,.18);font-size:.82rem;white-space:nowrap}`;document.head.appendChild(style);
+      .foodFavouriteHead{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:24px 2px 9px}.foodFavouriteHead .sectionTitle{margin:1px 0 0}.foodFavouriteHead .eyebrow{margin:0}.foodFavouriteHead>span{font-size:.72rem;color:#7a827b;margin-bottom:3px}.foodFavouriteHint{background:#f2eee4;border:1px solid rgba(93,85,75,.08);border-radius:15px;padding:11px 13px;color:#70695e;font-size:.78rem;line-height:1.4;margin-bottom:9px}.foodFavouriteCard{border-color:#d7d1bd;background:linear-gradient(145deg,#fffdf8,#faf5e9)}.foodFavouriteButton,.foodSavedHeart{border:0;background:transparent!important;color:#9a6755!important;font-size:1.2rem!important;line-height:1!important;padding:6px!important;min-width:30px;cursor:pointer}.foodFavouriteButton.isFavourite,.foodSavedHeart.isFavourite{color:#9b5f4c!important}.foodSavedHeart{margin-left:auto;align-self:flex-start;font-size:1.35rem!important}.foodHistoryFavouriteButton{font-size:1.08rem!important;padding:5px!important;min-width:28px}.foodFavouriteToast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:13000;background:#344b3c;color:white;border-radius:999px;padding:10px 15px;box-shadow:0 8px 30px rgba(0,0,0,.18);font-size:.82rem;white-space:nowrap}`;document.head.appendChild(style);
   }
 
   function apply(){
     if(!document.querySelector('#foodTodayList')||!document.querySelector('#foodSavedMeals'))return;
-    injectStyles();const s=state();renderFavourites(s);decorateToday(s);decorateSaved(s);
+    injectStyles();const s=state();renderFavourites(s);decorateToday(s);decorateHistory(s);decorateSaved(s);
   }
   function scheduleApply(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;apply()})}
 
@@ -113,4 +131,5 @@
 
   document.addEventListener('click',()=>setTimeout(scheduleApply,40));
   document.addEventListener('change',()=>setTimeout(scheduleApply,40));
+  const cook=document.querySelector('#cook');if(cook)new MutationObserver(()=>scheduleApply()).observe(cook,{childList:true,subtree:true});
 })();
