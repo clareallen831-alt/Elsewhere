@@ -73,6 +73,14 @@
     document.body.appendChild(ownedOutfits);
   }
 
+  function loadSewingPatterns(){
+    if(document.querySelector('script[data-elsewhere-sewing-patterns]'))return;
+    const sewingPatterns=document.createElement('script');
+    sewingPatterns.src='./sewing-patterns.js?v=20260816-beginner-capsule';
+    sewingPatterns.dataset.elsewhereSewingPatterns='true';
+    document.body.appendChild(sewingPatterns);
+  }
+
   // Load the Fashion area without disturbing the existing Elsewhere page structure.
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
@@ -91,4 +99,5 @@
     loadFashionSeasons();
   }
   loadOwnedFashionOutfits();
+  loadSewingPatterns();
 })();
