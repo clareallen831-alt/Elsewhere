@@ -3,7 +3,7 @@
   const ROOT_ID='foodFavouritesWrap';
   let scheduled=false;
 
-  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
   const uid=()=>`fav-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
   const num=v=>Number.isFinite(Number(v))?Number(v):0;
   const round=v=>Math.round(num(v));
