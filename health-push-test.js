@@ -65,6 +65,14 @@
     document.body.appendChild(seasons);
   }
 
+  function loadOwnedFashionOutfits(){
+    if(document.querySelector('script[data-elsewhere-fashion-owned-outfits]'))return;
+    const ownedOutfits=document.createElement('script');
+    ownedOutfits.src='./fashion-owned-outfits.js?v=20260816-navy-chinos';
+    ownedOutfits.dataset.elsewhereFashionOwnedOutfits='true';
+    document.body.appendChild(ownedOutfits);
+  }
+
   // Load the Fashion area without disturbing the existing Elsewhere page structure.
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
@@ -82,4 +90,5 @@
   }else{
     loadFashionSeasons();
   }
+  loadOwnedFashionOutfits();
 })();
