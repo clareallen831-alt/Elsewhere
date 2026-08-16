@@ -1,6 +1,6 @@
 # Elsewhere
 
-Elsewhere is a private, phone-friendly companion for food, health and the parts of life Clare wants to make room for.
+Elsewhere is a private, phone-friendly companion for food, health, style and the parts of life Clare wants to make room for.
 
 It is deliberately gentle:
 
@@ -15,15 +15,11 @@ Live app: https://clareallen831-alt.github.io/Elsewhere/
 
 ## Current structure
 
+Elsewhere now has five main areas: **Home, Food, Health, Fashion and My Life**.
+
 ### Home
 
-A short starting point for the areas used most:
-
-- Food
-- Health
-- Hugo & Me
-- My Sewing
-- More of my life
+A short starting point for the areas used most, including Food, Health, Fashion, Hugo & Me, My Sewing and the wider My Life area.
 
 The original activity-suggestion experience remains available through **Help me choose something**, but it is no longer the default home screen.
 
@@ -55,6 +51,20 @@ Private on-device tools include:
 - health-concern dates
 - notification and push-delivery checks
 
+### Fashion
+
+Fashion is built around a 34-piece British-countryside capsule rather than trend-led shopping.
+
+It includes:
+
+- a checkable capsule wardrobe with Own, Start, Invest and Later priorities
+- ten repeatable Outfit formulas
+- editorial illustrated Outfit boards
+- a Shop section that distinguishes where saving or investing makes sense
+- local progress saving on the device
+
+The Outfit artwork established the default representational visual language for Elsewhere: warm, grown-up editorial illustration with soft painterly rendering, natural proportions, tactile detail, warm paper backgrounds and the established muted Elsewhere palette.
+
 ### My Life
 
 My Life brings together:
@@ -68,20 +78,19 @@ My Life brings together:
 
 These are places to return to, not goals to complete.
 
-## Phase 4 simplification
+## From activity chooser to personal companion
 
-The app was reorganised after real use showed that food, health, Hugo and sewing had become more relevant than the original front-page questionnaire.
+Elsewhere began as a way to stop losing evenings to scrolling by offering one manageable activity at a time.
 
-Phase 4:
+Real use showed that Food, Health, Hugo and Sewing became stronger everyday reasons to open the app. The interface was therefore reorganised around practical Home access while retaining the original chooser as an optional route. Fashion was later added as the fifth main area.
 
-- replaced the long questionnaire with a practical Home
-- reduced the main navigation to Home, Food, Health and My Life
-- moved Ideas into My Life
-- moved the activity chooser behind an optional route
-- removed Look at me now from visible navigation
-- retained historic memories in local storage and backups
-- made Health load as part of the main app
-- preserved all existing data formats and backup compatibility
+Historic memories and **Look at me now** data remain preserved locally and in backups even though they no longer dominate the navigation.
+
+## Visual language
+
+When Elsewhere needs representational imagery—a person, scene, outfit, lifestyle moment, animal or place—the default is now **Elsewhere Editorial Illustration** unless a photograph, icon, diagram or chart communicates the information better.
+
+The detailed visual-language rules live in the Master Record.
 
 ## Backup and restore
 
@@ -89,7 +98,7 @@ Elsewhere can export and restore its on-device information, including food recor
 
 ## Privacy
 
-Elsewhere is local-first. Personal information is stored in the browser on the user's device. The GitHub repository contains the app code only—not personal health information, meal records, photographs or memories.
+Elsewhere is local-first. Personal information is stored in the browser on the user's device. The GitHub repository contains the app code and shared app assets only—not personal health information, meal records, private photographs or memories.
 
 Clearing browser data, deleting the installed app or changing devices may remove local information unless an Elsewhere backup has been exported.
 
@@ -101,4 +110,4 @@ Lock-screen activities and reminders depend on browser, installed-app and notifi
 
 ## Project record
 
-See [ROADMAP.md](ROADMAP.md) for the combined history of work completed across the different Elsewhere conversations and the decisions that remain deliberately out of scope.
+See [ROADMAP.md](ROADMAP.md) for the **Elsewhere Master Record**: the definitive product history, current structure, design principles, visual language, implemented features, deferred ideas and decision rules for future development.
