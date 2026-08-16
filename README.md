@@ -32,7 +32,8 @@ The food area supports:
 - quick food entry
 - importing several calorie estimates from ChatGPT
 - saved and reusable meals
-- recent food history
+- favourite meals with quick portion logging
+- recent food history, including favouriting meals from previous days
 - recipes built from ingredients
 - recipe totals and per-portion calculations
 - pasted recipes and nutritional information
@@ -58,7 +59,7 @@ Fashion is built around a 34-piece British-countryside capsule rather than trend
 It includes:
 
 - a checkable capsule wardrobe with Own, Start, Invest and Later priorities
-- ten repeatable Outfit formulas
+- repeatable Outfit formulas
 - editorial illustrated Outfit boards
 - a Shop section that distinguishes where saving or investing makes sense
 - local progress saving on the device
@@ -67,14 +68,14 @@ The Outfit artwork established the default representational visual language for 
 
 ### My Life
 
-My Life brings together:
+My Life is now deliberately narrower and brings together:
 
 - Hugo & Me
 - My Sewing
-- Make
-- My Places
 - saved ideas
 - the optional gentle activity chooser
+
+**Make** and **My Places** have been retired from the visible app because they are no longer part of the main focus. Existing locally stored data is left untouched rather than deleted.
 
 These are places to return to, not goals to complete.
 
@@ -94,7 +95,7 @@ The detailed visual-language rules live in the Master Record.
 
 ## Backup and restore
 
-Elsewhere can export and restore its on-device information, including food records, recipes, health information, Hugo and sewing progress, saved places, historic memories and locally stored photos where supported.
+Elsewhere can export and restore its on-device information, including food records, recipes, health information, Hugo and sewing progress, historic memories, legacy saved-place data and locally stored photos where supported.
 
 ## Privacy
 
@@ -110,4 +111,4 @@ Lock-screen activities and reminders depend on browser, installed-app and notifi
 
 ## Project record
 
-See [ROADMAP.md](ROADMAP.md) for the **Elsewhere Master Record**: the definitive product history, current structure, design principles, visual language, implemented features, deferred ideas and decision rules for future development.
+See [ROADMAP.md](ROADMAP.md) for the **Elsewhere Master Record**: the definitive product history, design principles, visual language, implemented features, deferred ideas and decision rules for future development. The README reflects the latest visible information architecture where older Master Record sections describe retired features historically.
