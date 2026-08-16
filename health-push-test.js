@@ -45,4 +45,19 @@
   const style=document.createElement('style');
   style.textContent=`#reminderStatus[data-kind="error"]{color:#8b4a42}#reminderStatus[data-kind="ok"]{color:#344b3c;font-weight:700}#reminderStatus[data-kind="working"]{opacity:.75}`;
   document.head.appendChild(style);
+
+  // Load the Fashion area without disturbing the existing Elsewhere page structure.
+  if(!document.querySelector('link[data-elsewhere-fashion]')){
+    const fashionStyle=document.createElement('link');
+    fashionStyle.rel='stylesheet';
+    fashionStyle.href='./fashion.css?v=20260816-fashion';
+    fashionStyle.dataset.elsewhereFashion='true';
+    document.head.appendChild(fashionStyle);
+  }
+  if(!document.querySelector('script[data-elsewhere-fashion]')){
+    const fashionScript=document.createElement('script');
+    fashionScript.src='./fashion.js?v=20260816-fashion';
+    fashionScript.dataset.elsewhereFashion='true';
+    document.body.appendChild(fashionScript);
+  }
 })();
