@@ -46,18 +46,29 @@
   style.textContent=`#reminderStatus[data-kind="error"]{color:#8b4a42}#reminderStatus[data-kind="ok"]{color:#344b3c;font-weight:700}#reminderStatus[data-kind="working"]{opacity:.75}`;
   document.head.appendChild(style);
 
+  function loadFashionSeasons(){
+    if(document.querySelector('script[data-elsewhere-fashion-seasons]'))return;
+    const seasons=document.createElement('script');
+    seasons.src='./fashion-seasons.js?v=20260816-seasons';
+    seasons.dataset.elsewhereFashionSeasons='true';
+    document.body.appendChild(seasons);
+  }
+
   // Load the Fashion area without disturbing the existing Elsewhere page structure.
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
     fashionStyle.rel='stylesheet';
-    fashionStyle.href='./fashion.css?v=20260816-fashion';
+    fashionStyle.href='./fashion.css?v=20260816-seasons';
     fashionStyle.dataset.elsewhereFashion='true';
     document.head.appendChild(fashionStyle);
   }
   if(!document.querySelector('script[data-elsewhere-fashion]')){
     const fashionScript=document.createElement('script');
-    fashionScript.src='./fashion.js?v=20260816-fashion';
+    fashionScript.src='./fashion.js?v=20260816-seasons';
     fashionScript.dataset.elsewhereFashion='true';
+    fashionScript.addEventListener('load',loadFashionSeasons,{once:true});
     document.body.appendChild(fashionScript);
+  }else{
+    loadFashionSeasons();
   }
 })();
