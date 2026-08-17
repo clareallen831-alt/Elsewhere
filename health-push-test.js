@@ -81,6 +81,14 @@
     document.body.appendChild(sewingPatterns);
   }
 
+  function loadFashionBasics(){
+    if(document.querySelector('script[data-elsewhere-fashion-basics]'))return;
+    const basics=document.createElement('script');
+    basics.src='./fashion-basics.js?v=20260817-core-tees';
+    basics.dataset.elsewhereFashionBasics='true';
+    document.body.appendChild(basics);
+  }
+
   // Load the Fashion area without disturbing the existing Elsewhere page structure.
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
@@ -100,4 +108,5 @@
   }
   loadOwnedFashionOutfits();
   loadSewingPatterns();
+  loadFashionBasics();
 })();
