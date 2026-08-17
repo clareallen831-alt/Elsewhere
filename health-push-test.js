@@ -89,6 +89,14 @@
     document.body.appendChild(basics);
   }
 
+  function loadFashionItemArt(){
+    if(document.querySelector('script[data-elsewhere-fashion-item-art]'))return;
+    const itemArt=document.createElement('script');
+    itemArt.src='./fashion-item-art.js?v=20260817-mini-art';
+    itemArt.dataset.elsewhereFashionItemArt='true';
+    document.body.appendChild(itemArt);
+  }
+
   // Load the Fashion area without disturbing the existing Elsewhere page structure.
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
@@ -109,4 +117,5 @@
   loadOwnedFashionOutfits();
   loadSewingPatterns();
   loadFashionBasics();
+  loadFashionItemArt();
 })();
