@@ -1,32 +1,15 @@
 (() => {
-  const MASTER_SOURCE='./illustrations/fashion/aw-master-sprite-b64.txt?v=20260817-master-fix';
-  const FINAL_SOURCE='./illustrations/fashion/aw-final-five.webp?v=20260817-final5-fix';
-  const MASTER_COLS=6, MASTER_ROWS=6;
-  const MASTER_ORDER=[
-    'tee-white','tee-cream','breton','tee-olive','tee-blue','tee-navy',
-    'cream-cable','oatmeal-lambswool','navy-merino','blue-knit','olive-cardigan','cream-halfzip',
-    'white-oxford','blue-oxford','stripe-oxford','chambray-shirt','cream-tee','dark-straight-jeans',
-    'mid-straight-jeans','wide-jeans','olive-cords','wool-trousers','chinos','wool-midi',
-    'ariat-wellies','barbour-short-wellies','tan-chelsea-boots','knee-boots','leather-belt','everyday-bag',
-    'wool-scarf','silk-scarf','stone-trench','wool-coat'
+  const CHUNKS=[
+    {src:'./illustrations/fashion/aw-sprite-1-b64.txt?v=20260817-c1',cols:3,rows:3,order:['tee-white','tee-cream','breton','tee-olive','tee-blue','tee-navy','cream-cable','oatmeal-lambswool','navy-merino']},
+    {src:'./illustrations/fashion/aw-sprite-2-b64.txt?v=20260817-c2',cols:3,rows:3,order:['blue-knit','olive-cardigan','cream-halfzip','white-oxford','blue-oxford','stripe-oxford','chambray-shirt','cream-tee','dark-straight-jeans']},
+    {src:'./illustrations/fashion/aw-sprite-3-b64.txt?v=20260817-c3',cols:3,rows:3,order:['mid-straight-jeans','wide-jeans','olive-cords','wool-trousers','chinos','wool-midi','ariat-wellies','barbour-short-wellies']},
+    {src:'./illustrations/fashion/aw-sprite-4a-b64.txt?v=20260817-c4a',cols:2,rows:2,order:['tan-chelsea-boots','knee-boots','leather-belt','everyday-bag']},
+    {src:'./illustrations/fashion/aw-sprite-4b-b64.txt?v=20260817-c4b',cols:2,rows:2,order:['wool-scarf','silk-scarf','stone-trench','wool-coat']}
   ];
-  const MASTER_POS=Object.fromEntries(MASTER_ORDER.map((key,i)=>[key,[i%MASTER_COLS,Math.floor(i/MASTER_COLS)]]));
-  const FINAL_POS={
-    'barbour-wax':[0,0],
-    'olive-barn':[1,0],
-    'tweed-blazer':[2,0],
-    'heeled-chelsea-boots':[0,1],
-    'loafers':[1,1]
-  };
-  const TEE_MAP={
-    'tee-white':'tee-white',
-    'tee-cream':'tee-cream',
-    'tee-breton':'breton',
-    'tee-olive':'tee-olive',
-    'tee-blue':'tee-blue',
-    'tee-navy':'tee-navy'
-  };
-  let masterUrl='';
+  const FINAL_SOURCE='./illustrations/fashion/aw-final-five.webp?v=20260817-final5-chunks';
+  const FINAL_POS={'barbour-wax':[0,0],'olive-barn':[1,0],'tweed-blazer':[2,0],'heeled-chelsea-boots':[0,1],'loafers':[1,1]};
+  const TEE_MAP={'tee-white':'tee-white','tee-cream':'tee-cream','tee-breton':'breton','tee-olive':'tee-olive','tee-blue':'tee-blue','tee-navy':'tee-navy'};
+  const assets=new Map();
   let finalUrl='';
 
   function injectStyles(){
@@ -48,54 +31,35 @@
     return URL.createObjectURL(new Blob([bytes],{type:'image/webp'}));
   }
 
-  function paintMasterElement(el,key){
-    if(!masterUrl||!MASTER_POS[key])return;
-    const [x,y]=MASTER_POS[key];
-    el.style.backgroundImage=`url("${masterUrl}")`;
+  function paint(el,key){
+    const a=assets.get(key);if(!a)return;
+    const x=a.index%a.cols,y=Math.floor(a.index/a.cols);
+    el.style.backgroundImage=`url("${a.url}")`;
     el.style.backgroundRepeat='no-repeat';
-    el.style.backgroundSize='600% 600%';
-    el.style.backgroundPosition=`${x/(MASTER_COLS-1)*100}% ${y/(MASTER_ROWS-1)*100}%`;
+    el.style.backgroundSize=`${a.cols*100}% ${a.rows*100}%`;
+    el.style.backgroundPosition=`${a.cols===1?0:x/(a.cols-1)*100}% ${a.rows===1?0:y/(a.rows-1)*100}%`;
   }
 
   function applyMaster(){
-    if(!masterUrl)return;
-    document.querySelectorAll('[data-aw-art]').forEach(el=>paintMasterElement(el,el.dataset.awArt));
+    document.querySelectorAll('[data-aw-art]').forEach(el=>paint(el,el.dataset.awArt));
     document.querySelectorAll('[data-core-tee]').forEach(input=>{
-      const key=TEE_MAP[input.dataset.coreTee];
-      if(!key)return;
-      const visual=input.closest('.fashionCoreTee')?.querySelector('.fashionCoreTeeVisual');
-      if(!visual)return;
+      const key=TEE_MAP[input.dataset.coreTee];if(!key||!assets.has(key))return;
+      const visual=input.closest('.fashionCoreTee')?.querySelector('.fashionCoreTeeVisual');if(!visual)return;
       let art=visual.querySelector('.awCoreTeeArt');
-      if(!art){
-        visual.innerHTML='';
-        art=document.createElement('span');
-        art.className='awCoreTeeArt';
-        visual.appendChild(art);
-      }
-      paintMasterElement(art,key);
+      if(!art){visual.innerHTML='';art=document.createElement('span');art.className='awCoreTeeArt';visual.appendChild(art)}
+      paint(art,key);
     });
   }
 
   function applyFinalFive(){
     if(!finalUrl)return;
     document.querySelectorAll('[data-aw-master-item]').forEach(input=>{
-      const key=input.dataset.awMasterItem;
-      const p=FINAL_POS[key];
-      if(!p)return;
-      const row=input.closest('.fashionCheck');
-      if(!row)return;
+      const key=input.dataset.awMasterItem,p=FINAL_POS[key];if(!p)return;
+      const row=input.closest('.fashionCheck');if(!row)return;
       let art=row.querySelector('.awFinalFiveArt');
-      if(!art){
-        art=document.createElement('span');
-        art.className='awFinalFiveArt';
-        art.setAttribute('aria-hidden','true');
-        const fake=row.querySelector('.fashionFakeCheck');
-        row.insertBefore(art,fake||row.firstChild);
-      }
+      if(!art){art=document.createElement('span');art.className='awFinalFiveArt';art.setAttribute('aria-hidden','true');const fake=row.querySelector('.fashionFakeCheck');row.insertBefore(art,fake||row.firstChild)}
       art.style.backgroundImage=`url("${finalUrl}")`;
-      art.style.backgroundRepeat='no-repeat';
-      art.style.backgroundSize='300% 200%';
-      art.style.backgroundPosition=`${p[0]/2*100}% ${p[1]*100}%`;
+      art.style.backgroundRepeat='no-repeat';art.style.backgroundSize='300% 200%';art.style.backgroundPosition=`${p[0]/2*100}% ${p[1]*100}%`;
     });
   }
 
@@ -103,44 +67,27 @@
     injectStyles();
     if(localStorage.getItem('elsewhere_fashion_season_v1')==='ss')return;
     if((localStorage.getItem('elsewhere_fashion_tab_v1')||'capsule')!=='capsule')return;
-    applyMaster();
-    applyFinalFive();
+    applyMaster();applyFinalFive();
   }
 
-  async function loadMaster(){
-    try{
-      const r=await fetch(MASTER_SOURCE,{cache:'no-cache'});
-      if(!r.ok)throw new Error(`Master illustrations ${r.status}`);
-      masterUrl=base64WebpToUrl(await r.text());
-      apply();
-    }catch(e){console.warn('Could not repair Autumn/Winter master illustrations',e)}
+  async function loadChunk(chunk){
+    const r=await fetch(chunk.src,{cache:'no-cache'});if(!r.ok)throw new Error(`${chunk.src} ${r.status}`);
+    const url=base64WebpToUrl(await r.text());
+    chunk.order.forEach((key,index)=>assets.set(key,{url,index,cols:chunk.cols,rows:chunk.rows}));
   }
-
+  async function loadAllChunks(){
+    const results=await Promise.allSettled(CHUNKS.map(loadChunk));
+    results.filter(x=>x.status==='rejected').forEach(x=>console.warn('Could not load wardrobe illustration chunk',x.reason));
+    apply();
+  }
   async function loadFinalFive(){
-    try{
-      const r=await fetch(FINAL_SOURCE,{cache:'no-cache'});
-      if(!r.ok)throw new Error(`Final illustrations ${r.status}`);
-      finalUrl=URL.createObjectURL(await r.blob());
-      apply();
-    }catch(e){console.warn('Could not load final Autumn/Winter illustrations',e)}
+    try{const r=await fetch(FINAL_SOURCE,{cache:'no-cache'});if(!r.ok)throw new Error(`Final illustrations ${r.status}`);finalUrl=URL.createObjectURL(await r.blob());apply()}catch(e){console.warn('Could not load final Autumn/Winter illustrations',e)}
   }
 
   let pending=false;
-  function sync(){
-    if(pending)return;
-    pending=true;
-    requestAnimationFrame(()=>{pending=false;apply()});
-  }
-
-  const observer=new MutationObserver(sync);
-  observer.observe(document.documentElement,{childList:true,subtree:true});
-  document.addEventListener('click',e=>{
-    if(e.target.closest?.('[data-fashion-tab],[data-fashion-season],.nav[data-go="fashion"],[data-fashion-link]'))setTimeout(apply,100);
-  },true);
+  function sync(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;apply()})}
+  const observer=new MutationObserver(sync);observer.observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('click',e=>{if(e.target.closest?.('[data-fashion-tab],[data-fashion-season],.nav[data-go="fashion"],[data-fashion-link]'))setTimeout(apply,100)},true);
   window.addEventListener('pageshow',apply);
-
-  injectStyles();
-  loadMaster();
-  loadFinalFive();
-  apply();
+  injectStyles();loadAllChunks();loadFinalFive();apply();
 })();
