@@ -42,7 +42,6 @@
     serverTest();
   },true);
 
-  // If Spring/Summer was the last selected wardrobe, restore it after returning to Fashion.
   document.addEventListener('click',e=>{
     const target=e.target.closest?.('.nav[data-go="fashion"], [data-fashion-link]');
     if(!target)return;
@@ -89,15 +88,14 @@
     document.body.appendChild(basics);
   }
 
-  function loadFashionItemArt(){
-    if(document.querySelector('script[data-elsewhere-fashion-item-art]'))return;
-    const itemArt=document.createElement('script');
-    itemArt.src='./fashion-item-art.js?v=20260817-mini-art';
-    itemArt.dataset.elsewhereFashionItemArt='true';
-    document.body.appendChild(itemArt);
+  function loadFashionAwMaster(){
+    if(document.querySelector('script[data-elsewhere-fashion-aw-master]'))return;
+    const master=document.createElement('script');
+    master.src='./fashion-aw-master.js?v=20260817-master';
+    master.dataset.elsewhereFashionAwMaster='true';
+    document.body.appendChild(master);
   }
 
-  // Load the Fashion area without disturbing the existing Elsewhere page structure.
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
     fashionStyle.rel='stylesheet';
@@ -117,5 +115,5 @@
   loadOwnedFashionOutfits();
   loadSewingPatterns();
   loadFashionBasics();
-  loadFashionItemArt();
+  loadFashionAwMaster();
 })();
