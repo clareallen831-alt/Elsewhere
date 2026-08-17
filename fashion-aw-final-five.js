@@ -6,7 +6,7 @@
     {src:'./illustrations/fashion/aw-sprite-4a-b64.txt?v=20260817-c4a',cols:2,rows:2,order:['tan-chelsea-boots','knee-boots','leather-belt','everyday-bag']},
     {src:'./illustrations/fashion/aw-sprite-4b-b64.txt?v=20260817-c4b',cols:2,rows:2,order:['wool-scarf','silk-scarf','stone-trench','wool-coat']}
   ];
-  const FINAL_SOURCE='./illustrations/fashion/aw-final-five.webp?v=20260817-final5-chunks';
+  const FINAL_SOURCE='./illustrations/fashion/aw-final-five-small-b64.txt?v=20260817-final5-safe';
   const FINAL_POS={'barbour-wax':[0,0],'olive-barn':[1,0],'tweed-blazer':[2,0],'heeled-chelsea-boots':[0,1],'loafers':[1,1]};
   const TEE_MAP={'tee-white':'tee-white','tee-cream':'tee-cream','tee-breton':'breton','tee-olive':'tee-olive','tee-blue':'tee-blue','tee-navy':'tee-navy'};
   const assets=new Map();
@@ -81,7 +81,7 @@
     apply();
   }
   async function loadFinalFive(){
-    try{const r=await fetch(FINAL_SOURCE,{cache:'no-cache'});if(!r.ok)throw new Error(`Final illustrations ${r.status}`);finalUrl=URL.createObjectURL(await r.blob());apply()}catch(e){console.warn('Could not load final Autumn/Winter illustrations',e)}
+    try{const r=await fetch(FINAL_SOURCE,{cache:'no-cache'});if(!r.ok)throw new Error(`Final illustrations ${r.status}`);finalUrl=base64WebpToUrl(await r.text());apply()}catch(e){console.warn('Could not load final Autumn/Winter illustrations',e)}
   }
 
   let pending=false;
