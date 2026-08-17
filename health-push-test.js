@@ -96,6 +96,14 @@
     document.body.appendChild(master);
   }
 
+  function loadFashionAwFinalFive(){
+    if(document.querySelector('script[data-elsewhere-fashion-aw-final-five]'))return;
+    const finalFive=document.createElement('script');
+    finalFive.src='./fashion-aw-final-five.js?v=20260817-final5';
+    finalFive.dataset.elsewhereFashionAwFinalFive='true';
+    document.body.appendChild(finalFive);
+  }
+
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
     fashionStyle.rel='stylesheet';
@@ -116,4 +124,5 @@
   loadSewingPatterns();
   loadFashionBasics();
   loadFashionAwMaster();
+  loadFashionAwFinalFive();
 })();
