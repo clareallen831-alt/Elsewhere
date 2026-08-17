@@ -1,5 +1,6 @@
 (() => {
-  const SPRITE='./illustrations/fashion/item-sprite.webp';
+  let SPRITE='';
+  const SPRITE_SOURCE='./illustrations/fashion/item-sprite-b64.txt';
   const POS={"tee-white":[0,0],"tee-cream":[1,0],"tee-breton":[2,0],"tee-olive":[3,0],"tee-blue":[0,1],"tee-navy":[1,1],"aw-cream-knit":[2,1],"aw-navy-knit":[3,1],"aw-olive-overshirt":[0,2],"aw-blue-oxford":[1,2],"aw-striped-shirt":[2,2],"aw-dark-jeans":[3,2],"aw-navy-chinos":[0,3],"aw-stone-trench":[1,3],"aw-charcoal-coat":[2,3],"aw-chelsea-boots":[3,3],"aw-loafers":[0,4]};
   const CHECK_MAP={
     'cream-cable':'aw-cream-knit',
@@ -23,12 +24,16 @@
     const p=POS[key]||[0,0];
     return `${p[0]*33.333333}% ${p[1]*25}%`;
   }
+  function paint(el){
+    if(!SPRITE||!el?.dataset?.artKey)return;
+    el.style.backgroundImage=`url("${SPRITE}")`;
+    el.style.backgroundPosition=pos(el.dataset.artKey);
+  }
   function art(key,cls='fashionMiniArt'){
     const el=document.createElement('span');
     el.className=cls;
     el.dataset.artKey=key;
-    el.style.backgroundImage=`url("${SPRITE}")`;
-    el.style.backgroundPosition=pos(key);
+    paint(el);
     return el;
   }
   function injectStyles(){
@@ -58,9 +63,11 @@
       const id=input.dataset.coreTee;
       if(!POS[id])return;
       const visual=input.closest('.fashionCoreTee')?.querySelector('.fashionCoreTeeVisual');
-      if(!visual||visual.querySelector('.fashionTeeSpriteArt'))return;
-      visual.innerHTML='';
-      visual.appendChild(art(id,'fashionTeeSpriteArt'));
+      if(!visual)return;
+      if(!visual.querySelector('.fashionTeeSpriteArt')){
+        visual.innerHTML='';
+        visual.appendChild(art(id,'fashionTeeSpriteArt'));
+      }
     });
   }
 
@@ -124,13 +131,27 @@
     });
   }
 
+  function repaint(){
+    document.querySelectorAll('[data-art-key]').forEach(paint);
+  }
   function render(){
     injectStyles();
     applyTees();
     applyChecklist();
     applyProducts();
     addExtras();
+    repaint();
   }
+  async function loadSprite(){
+    try{
+      const response=await fetch(SPRITE_SOURCE,{cache:'no-cache'});
+      if(!response.ok)throw new Error('Fashion illustrations could not load');
+      const raw=(await response.text()).trim();
+      SPRITE=`data:image/webp;base64,${raw}`;
+      render();
+    }catch(err){console.warn(err)}
+  }
+
   const observer=new MutationObserver(()=>requestAnimationFrame(render));
   observer.observe(document.documentElement,{childList:true,subtree:true});
   document.addEventListener('click',e=>{
@@ -139,4 +160,5 @@
   },true);
   window.addEventListener('pageshow',render);
   render();
+  loadSprite();
 })();
