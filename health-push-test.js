@@ -42,16 +42,6 @@
     serverTest();
   },true);
 
-  document.addEventListener('click',e=>{
-    const target=e.target.closest?.('.nav[data-go="fashion"], [data-fashion-link]');
-    if(!target)return;
-    setTimeout(()=>{
-      if(localStorage.getItem('elsewhere_fashion_season_v1')!=='ss')return;
-      const tab=localStorage.getItem('elsewhere_fashion_tab_v1')||'capsule';
-      document.querySelector(`[data-fashion-tab="${tab}"]`)?.click();
-    },40);
-  });
-
   const style=document.createElement('style');
   style.textContent=`#reminderStatus[data-kind="error"]{color:#8b4a42}#reminderStatus[data-kind="ok"]{color:#344b3c;font-weight:700}#reminderStatus[data-kind="working"]{opacity:.75}`;
   document.head.appendChild(style);
@@ -64,22 +54,6 @@
     document.body.appendChild(scanner);
   }
 
-  function loadFashionSeasons(){
-    if(document.querySelector('script[data-elsewhere-fashion-seasons]'))return;
-    const seasons=document.createElement('script');
-    seasons.src='./fashion-seasons.js?v=20260816-seasons';
-    seasons.dataset.elsewhereFashionSeasons='true';
-    document.body.appendChild(seasons);
-  }
-
-  function loadOwnedFashionOutfits(){
-    if(document.querySelector('script[data-elsewhere-fashion-owned-outfits]'))return;
-    const ownedOutfits=document.createElement('script');
-    ownedOutfits.src='./fashion-owned-outfits.js?v=20260816-navy-chinos';
-    ownedOutfits.dataset.elsewhereFashionOwnedOutfits='true';
-    document.body.appendChild(ownedOutfits);
-  }
-
   function loadSewingPatterns(){
     if(document.querySelector('script[data-elsewhere-sewing-patterns]'))return;
     const sewingPatterns=document.createElement('script');
@@ -88,50 +62,20 @@
     document.body.appendChild(sewingPatterns);
   }
 
-  function loadFashionBasics(){
-    if(document.querySelector('script[data-elsewhere-fashion-basics]'))return;
-    const basics=document.createElement('script');
-    basics.src='./fashion-basics.js?v=20260817-core-tees';
-    basics.dataset.elsewhereFashionBasics='true';
-    document.body.appendChild(basics);
-  }
-
-  function loadFashionAwMaster(){
-    if(document.querySelector('script[data-elsewhere-fashion-aw-master]'))return;
-    const master=document.createElement('script');
-    master.src='./fashion-aw-master.js?v=20260817-master';
-    master.dataset.elsewhereFashionAwMaster='true';
-    document.body.appendChild(master);
-  }
-
-  function loadFashionAwFinalFive(){
-    if(document.querySelector('script[data-elsewhere-fashion-aw-final-five]'))return;
-    const finalFive=document.createElement('script');
-    finalFive.src='./fashion-aw-final-five.js?v=20260817-final5';
-    finalFive.dataset.elsewhereFashionAwFinalFive='true';
-    document.body.appendChild(finalFive);
-  }
-
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
     fashionStyle.rel='stylesheet';
-    fashionStyle.href='./fashion.css?v=20260816-seasons';
+    fashionStyle.href='./fashion.css?v=20260820-soft-country';
     fashionStyle.dataset.elsewhereFashion='true';
     document.head.appendChild(fashionStyle);
   }
   if(!document.querySelector('script[data-elsewhere-fashion]')){
     const fashionScript=document.createElement('script');
-    fashionScript.src='./fashion.js?v=20260816-seasons';
+    fashionScript.src='./fashion.js?v=20260820-soft-country';
     fashionScript.dataset.elsewhereFashion='true';
-    fashionScript.addEventListener('load',loadFashionSeasons,{once:true});
     document.body.appendChild(fashionScript);
-  }else{
-    loadFashionSeasons();
   }
+
   loadFoodBarcode();
-  loadOwnedFashionOutfits();
   loadSewingPatterns();
-  loadFashionBasics();
-  loadFashionAwMaster();
-  loadFashionAwFinalFive();
 })();
