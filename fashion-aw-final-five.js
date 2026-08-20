@@ -8,6 +8,14 @@
   ];
   const FINAL_SOURCE='./illustrations/fashion/aw-final-five-small-b64.txt?v=20260817-final5-safe';
   const FINAL_POS={'barbour-wax':[0,0],'olive-barn':[1,0],'tweed-blazer':[2,0],'heeled-chelsea-boots':[0,1],'loafers':[1,1]};
+  const REPAIR_SOURCE='./illustrations/fashion/aw-repair-sprite.webp?v=20260820-repair1';
+  const REPAIR_POS={
+    'olive-cardigan':[0,0],
+    'cream-halfzip':[1,0],
+    'chambray-shirt':[2,0],
+    'leather-belt':[0,1],
+    'everyday-bag':[1,1]
+  };
   const TEE_MAP={'tee-white':'tee-white','tee-cream':'tee-cream','tee-breton':'breton','tee-olive':'tee-olive','tee-blue':'tee-blue','tee-navy':'tee-navy'};
   const assets=new Map();
   let finalUrl='',started=false,panelObserver=null,observedPanel=null;
@@ -44,8 +52,17 @@
   }
 
   function paint(parent,key){
+    const layer=layerFor(parent);
+    const repair=REPAIR_POS[key];
+    if(repair){
+      layer.style.backgroundImage=`url("${REPAIR_SOURCE}")`;
+      layer.style.backgroundSize='300% 200%';
+      layer.style.backgroundPosition=`${repair[0]/2*100}% ${repair[1]*100}%`;
+      return;
+    }
+
     const a=assets.get(key);if(!a)return;
-    const x=a.index%a.cols,y=Math.floor(a.index/a.cols),layer=layerFor(parent);
+    const x=a.index%a.cols,y=Math.floor(a.index/a.cols);
     layer.style.backgroundImage=`url("${a.url}")`;
     layer.style.backgroundSize=`${a.cols*100}% ${a.rows*100}%`;
     layer.style.backgroundPosition=`${a.cols===1?0:x/(a.cols-1)*100}% ${a.rows===1?0:y/(a.rows-1)*100}%`;
