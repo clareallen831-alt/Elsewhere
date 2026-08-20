@@ -56,6 +56,14 @@
   style.textContent=`#reminderStatus[data-kind="error"]{color:#8b4a42}#reminderStatus[data-kind="ok"]{color:#344b3c;font-weight:700}#reminderStatus[data-kind="working"]{opacity:.75}`;
   document.head.appendChild(style);
 
+  function loadFoodBarcode(){
+    if(document.querySelector('script[data-elsewhere-food-barcode]'))return;
+    const scanner=document.createElement('script');
+    scanner.src='./food-barcode.js?v=20260820-barcode';
+    scanner.dataset.elsewhereFoodBarcode='true';
+    document.body.appendChild(scanner);
+  }
+
   function loadFashionSeasons(){
     if(document.querySelector('script[data-elsewhere-fashion-seasons]'))return;
     const seasons=document.createElement('script');
@@ -120,6 +128,7 @@
   }else{
     loadFashionSeasons();
   }
+  loadFoodBarcode();
   loadOwnedFashionOutfits();
   loadSewingPatterns();
   loadFashionBasics();
