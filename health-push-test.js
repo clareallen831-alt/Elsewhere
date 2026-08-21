@@ -62,6 +62,14 @@
     document.body.appendChild(sewingPatterns);
   }
 
+  function loadFashionCoatColour(){
+    if(document.querySelector('script[data-elsewhere-fashion-coat-colour]'))return;
+    const coatColour=document.createElement('script');
+    coatColour.src='./fashion-coat-colour.js?v=20260821-green-brown';
+    coatColour.dataset.elsewhereFashionCoatColour='true';
+    document.body.appendChild(coatColour);
+  }
+
   if(!document.querySelector('link[data-elsewhere-fashion]')){
     const fashionStyle=document.createElement('link');
     fashionStyle.rel='stylesheet';
@@ -73,7 +81,10 @@
     const fashionScript=document.createElement('script');
     fashionScript.src='./fashion.js?v=20260820-soft-country';
     fashionScript.dataset.elsewhereFashion='true';
+    fashionScript.addEventListener('load',loadFashionCoatColour,{once:true});
     document.body.appendChild(fashionScript);
+  }else{
+    loadFashionCoatColour();
   }
 
   loadFoodBarcode();
