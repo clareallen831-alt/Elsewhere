@@ -59,12 +59,11 @@ Fashion is built around a 34-piece British-countryside capsule rather than trend
 It includes:
 
 - a checkable capsule wardrobe with Own, Start, Invest and Later priorities
-- repeatable Outfit formulas
-- editorial illustrated Outfit boards
+- repeatable, text-led Outfit formulas
 - a Shop section that distinguishes where saving or investing makes sense
 - local progress saving on the device
 
-The Outfit artwork established the default representational visual language for Elsewhere: warm, grown-up editorial illustration with soft painterly rendering, natural proportions, tactile detail, warm paper backgrounds and the established muted Elsewhere palette.
+The Fashion area is deliberately practical and text-led: clothing lists, colour swatches and outfit formulas remain, while representational outfit artwork is not shown.
 
 ### My Life
 
@@ -89,13 +88,15 @@ Historic memories and **Look at me now** data remain preserved locally and in ba
 
 ## Visual language
 
-When Elsewhere needs representational imagery—a person, scene, outfit, lifestyle moment, animal or place—the default is now **Elsewhere Editorial Illustration** unless a photograph, icon, diagram or chart communicates the information better.
+Elsewhere now uses an **icons-only interface**. Inline SVG icons, app icons and navigation icons provide orientation, while decorative photographs, outfit illustrations and other representational imagery are not shown.
 
-The detailed visual-language rules live in the Master Record.
+Colour swatches, simple diagrams and charts remain where they communicate useful information rather than acting as decoration.
+
+Historic locally saved photos are not deleted by this change. They remain available to backups, but the visible app no longer asks for or displays them.
 
 ## Backup and restore
 
-Elsewhere can export and restore its on-device information, including food records, recipes, health information, Hugo and sewing progress, historic memories, legacy saved-place data and locally stored photos where supported.
+Elsewhere can export and restore its on-device information, including food records, recipes, health information, Hugo and sewing progress, historic memories, legacy saved-place data and previously stored local photos where supported.
 
 ## Privacy
 
